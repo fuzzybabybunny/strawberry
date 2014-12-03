@@ -1,0 +1,35 @@
+<head>
+    <title>myApp</title>
+</head>
+
+<body>
+
+<!-- Template 1  -->
+  <div id="myvideo">
+    <div id="player"></div>
+    <div class="overlay">
+      <div class="comment-box"></div>
+
+      <button class="play">Play</button>
+
+      <button class="fullscreen">Fullscreen</button>
+
+      <button class="comment">Comment</button>
+
+      <input type="text" id="comments">
+    </div>
+  </div>
+
+<!-- Template 2 -->
+  <div class="comment-summary">
+    {{#each comments}}
+      {{> comment}}
+    {{/each}}
+  </div>
+
+</body>
+
+<!-- Template 3 -->
+<template name="comment">
+  <div>{{text}} @ {{currentTime}}</div>
+</template>
