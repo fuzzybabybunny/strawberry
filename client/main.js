@@ -30,13 +30,25 @@ onYouTubeIframeAPIReady = function () {
     // Events like ready, state change,
     events: {
       onReady: function (event) {
+        console.log("video is ready");
         // Play video when player ready.
         // event.target.playVideo();
         // ^^^^^^^^^^^^^^^^^^^^^^^^ commented out for now so it doesn't autoplay every hot code push
+
+      var defaultVolume = player.getVolume();
+
+      $("#volumeSlider").slider({
+        range: "min",
+        value: defaultVolume,
+
+        slide: function(event, ui) {
+          var value = $("#volumeSlider").slider('value');
+          player.setVolume(value)
+          }
+        });
       }
 
     }
-
   });
 
   var videoData = Comments.find().fetch();
@@ -95,6 +107,8 @@ onYouTubeIframeAPIReady = function () {
   $(".fullscreen").click(function() {
     toggleFullScreen();
   });
+
+
 
   var el = document.getElementById("comments")
   el.addEventListener("keydown", function(e) {
