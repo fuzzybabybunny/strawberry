@@ -75,6 +75,7 @@ onYouTubeIframeAPIReady = function () {
           seconds = Math.floor(totalSeconds % 60);
           $('<div class="comment"></div>').text(commentObj.text +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
         });
+
       }
       videoOldTime = videoCurrentTime;
     }
@@ -86,6 +87,15 @@ onYouTubeIframeAPIReady = function () {
       console.log(videoData);
     }
   }, refreshDataInterval);
+
+  Meteor.setInterval(function () {
+    var VCT = player.getCurrentTime();
+    var DUR = player.getDuration();
+    var progress = VCT / DUR * 100;
+    $("#progressBar").progressbar({
+      value: progress
+    });
+  }, 1000);
 
   $(".play").click(function() {
     if (player.getPlayerState() === 1) {
@@ -107,8 +117,6 @@ onYouTubeIframeAPIReady = function () {
   $(".fullscreen").click(function() {
     toggleFullScreen();
   });
-
-
 
   var el = document.getElementById("comments")
   el.addEventListener("keydown", function(e) {
