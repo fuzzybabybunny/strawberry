@@ -1,0 +1,20 @@
+@font-face {
+    font-family: dennePrettyShit;
+    src: url("/fonts/dennePrettyShit.ttf");
+}
+
+.icon-labels.text {
+  font-size: 17px;
+  -ms-transform: rotate(-45deg); /* IE 9 */
+  -webkit-transform: rotate(-45deg); /* Chrome, Safari, Opera */
+  transform: rotate(-45deg);
+  margin-left: -8px;
+  margin-top: 2px;
+
+}
+
+a .icon-labels.labels{
+  margin-left: -3px;
+  margin-top: -3px;
+}
+
