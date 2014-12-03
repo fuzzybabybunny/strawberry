@@ -36,29 +36,10 @@
   font-size: 30px;
 }
 
-
 #comments {
   display: none;
 }
 
 .comment-summary {
   margin-top: 110px;
-}
-
-.progressbar {
-  margin-top: 100px;
-}
-
-#progressBar {
-  width: 1260px;
-  height: 8px;
-  background-color: #444444;
-  display: none;
-  margin-top: 1px;
-}
-
-#progressBar div {
-  height: 100%;
-  width: 0;
-  background-color: #ffffff;
 }

@@ -29,11 +29,10 @@ onYouTubeIframeAPIReady = function () {
 
     // Events like ready, state change,
     events: {
-
       onReady: function (event) {
-
         // Play video when player ready.
         // event.target.playVideo();
+        // ^^^^^^^^^^^^^^^^^^^^^^^^ commented out for now so it doesn't autoplay every hot code push
       }
 
     }
@@ -43,27 +42,27 @@ onYouTubeIframeAPIReady = function () {
   var videoData = Comments.find().fetch();
 
   var commentInterval = 1000;
-  var minTimeLapse = 2;
-  var videoOldTime = 0;
   var refreshDataInterval = 10000;
+  var minTimeLapse = 2;
+
+  var videoOldTime = 0;
 
   Meteor.setInterval(function () {
     if (player.getPlayerState() === 1) {
       var videoCurrentTime = player.getCurrentTime();
       // console.log(videoCurrentTime);
-      dataArray = videoData.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
-      // console.log("between" + videoOldTime + " and " + videoCurrentTime + " : " + dataArray.length);
+      var commentsInInterval = videoData.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
+      // console.log("between" + videoOldTime + " and " + videoCurrentTime + " : " + commentsInInterval.length);
 
-      if (dataArray !== [] && videoCurrentTime - videoOldTime <= minTimeLapse) {
-        var arrayLength = dataArray.length;
-        for (var i = 0; i < arrayLength; i++) {
-          var comment = dataArray[i].text;
+      if (commentsInInterval.length > 0 && videoCurrentTime - videoOldTime <= minTimeLapse) {
+
+        commentsInInterval.forEach(function(commentObj) {
           // console.log(comment);
           totalSeconds = videoCurrentTime;
           minutes = Math.floor(totalSeconds / 60);
           seconds = Math.floor(totalSeconds % 60);
-          $('<div class="comment"></div>').text(comment +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
-        }
+          $('<div class="comment"></div>').text(commentObj.text +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+        });
       }
       videoOldTime = videoCurrentTime;
     }
@@ -76,40 +75,26 @@ onYouTubeIframeAPIReady = function () {
     }
   }, refreshDataInterval);
 
-  // Meteor.setInterval(function () {
-  //   if (player.getPlayerState() === 1) {
-  //     videoCurrentTime = Math.floor(player.getCurrentTime());
-  //     console.log(videoCurrentTime);
-  //     if (Comments.findOne({currentTime: videoCurrentTime}) !== undefined ) {
-  //       var comment = Comments.findOne({currentTime: videoCurrentTime}).text;
-  //       console.log(comment);
-  //       totalSeconds = player.getCurrentTime();
-  //       minutes = Math.floor(totalSeconds / 60);
-  //       seconds = Math.floor(totalSeconds % 60);
-  //       // $(".comment-box").text(comment +"@ "+ minutes + ":" + seconds ).fadeIn('500').delay('1000').fadeOut('500');
-  //       $('<div class="comment"></div>').text(comment +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
-  //     }
-  //   }
-  // }, 1000);
-
   $(".play").click(function() {
-    player.playVideo();
-    // toggleFullScreen();
-  });
-
-  $(".pause").click(function() {
-    player.pauseVideo();
-    // $(".duration").html(player.getDuration());
+    if (player.getPlayerState() === 1) {
+      player.pauseVideo();
+      $(".play").html("Play");
+    }
+    else if (player.getPlayerState() !== 1) {
+      player.playVideo();
+      $(".play").html("Pause");
+    }
   });
 
   $(".comment").click(function() {
     player.pauseVideo();
-    // $(".duration").html(player.getDuration());
     var comment = $("#comments").val('');
     $("#comments").slideDown().focus();
   });
 
-
+  $(".fullscreen").click(function() {
+    toggleFullScreen();
+  });
 
   var el = document.getElementById("comments")
   el.addEventListener("keydown", function(e) {
@@ -147,15 +132,6 @@ onYouTubeIframeAPIReady = function () {
       }
     }
   }
-
-  // document.addEventListener("keydown", function(e) {
-  //   if (e.keyCode == 13) {
-  //     toggleFullScreen();
-  //   }
-  // }, false);
-
-
-
 };
 
 YT.load();
