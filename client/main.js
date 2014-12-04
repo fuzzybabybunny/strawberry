@@ -30,13 +30,24 @@ onYouTubeIframeAPIReady = function () {
     // Events like ready, state change,
     events: {
       onReady: function (event) {
+        console.log("video is ready");
         // Play video when player ready.
         // event.target.playVideo();
         // ^^^^^^^^^^^^^^^^^^^^^^^^ commented out for now so it doesn't autoplay every hot code push
+
+      var defaultVolume = player.getVolume();
+
+      $("#volumeSlider").slider({
+        range: "min",
+        value: defaultVolume,
+
+        slide: function(event, ui) {
+          player.setVolume(ui.value);
+          }
+        });
       }
 
     }
-
   });
 
   var videoData = Comments.find().fetch();
@@ -49,6 +60,7 @@ onYouTubeIframeAPIReady = function () {
 
   Meteor.setInterval(function () {
     if (player.getPlayerState() === 1) {
+
       var videoCurrentTime = player.getCurrentTime();
       // console.log(videoCurrentTime);
       var commentsInInterval = videoData.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
@@ -63,6 +75,7 @@ onYouTubeIframeAPIReady = function () {
           seconds = Math.floor(totalSeconds % 60);
           $('<div class="comment"></div>').text(commentObj.text +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
         });
+
       }
       videoOldTime = videoCurrentTime;
     }
@@ -74,6 +87,15 @@ onYouTubeIframeAPIReady = function () {
       console.log(videoData);
     }
   }, refreshDataInterval);
+
+  Meteor.setInterval(function () {
+    var VCT = player.getCurrentTime();
+    var DUR = player.getDuration();
+    var progress = VCT / DUR * 100;
+    $("#progressBar").progressbar({
+      value: progress
+    });
+  }, 1000);
 
   $(".play").click(function() {
     if (player.getPlayerState() === 1) {

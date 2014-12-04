@@ -6,6 +6,14 @@
 meteor-platform
 autopublish
 insecure
+jquery
+ixdi:material-design-iconic-font
+linto:fontawesome
 iron:router
 adrianliaw:youtube-iframe-api
+mizzao:jquery-ui
+mizzao:bootstrap-3
+underscore
+stevezhu:sass
+material-design
 
