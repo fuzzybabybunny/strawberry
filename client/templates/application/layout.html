@@ -1,6 +1,5 @@
 <head>
   <title>潮媒</title>
-  <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -46,10 +45,9 @@
 
           </ul>
 
-
           <ul class="nav navbar-nav navbar-right header-search">
             <li class="header-search-container">
-              <button class="btn btn-fab btn-primary search-button"><i class="md md-search"></i></button>
+              <button class="btn btn-fab btn-primary search-button" data-toggle="tooltip" data-placement="bottom" title="Search"><i class="md md-search"></i></button>
               <form class="navbar-form navbar-right search-field hidden">
                 <div class="form-control-wrapper">
                   <input type="text" class="form-control col-lg-8 empty" placeholder="Search"><span class="material-input"></span>
@@ -57,10 +55,26 @@
               </form>
             </li>
 
-
-
+            <li class="dropdown header-login">
+              <button class="btn btn-fab btn-primary login-button dropdown-toggle" data-toggle="tooltip" data-placement="bottom" title="Signup or Login"><i class="fa fa-user fa-fw dropdown-toggle" data-toggle="dropdown"></i>
+              </button>
+                <!-- <div class="ripple-wrapper"></div> -->
+              <ul class="dropdown-menu">
+                <li><a href="javascript:void(0)">Action</a></li>
+                <li><a href="javascript:void(0)">Another action</a></li>
+                <li><a href="javascript:void(0)">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Dropdown header</li>
+                <li><a href="javascript:void(0)">Separated link</a></li>
+                <li><a href="javascript:void(0)">One more separated link</a></li>
+              </ul>
+            </li>
 
           </ul>
+
+
+
+
         </div>
       </div>
     </div>

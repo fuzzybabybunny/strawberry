@@ -33,7 +33,12 @@
 
 div.navbar.navbar-info.navbar-fixed-top {
   height: 90px;
+}
 
+.box-shadow {
+  -webkit-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.5);
 }
 
 a.navbar-brand.header-brand {
@@ -41,7 +46,7 @@ a.navbar-brand.header-brand {
   background-color: rgba(255,255,255,0.4);
   border-radius: 50px;
   margin-right: 50px;
-  width: 200px;
+  width: 250px;
   text-align: center;
   height: 75px;
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
@@ -61,11 +66,11 @@ a.navbar-brand.header-brand {
     p {
       font-family: "taotaojian";
       color: #BD1121;
-      text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-      -moz-text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-      -webkit-text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-      font-size: 50px;
-      transform: translateY(50%);
+      text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+      -moz-text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+      -webkit-text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+      font-size: 70px;
+      transform: translateY(70%);
     }
   }
 }
@@ -156,6 +161,16 @@ ul.header-search {
       padding: 0px;
       width: 0;
       display: hidden;
+    }
+  }
+  li.header-login {
+    height: 90px;
+    .login-button {
+      @include vertical-align;
+      i {
+        margin-left: -3px;
+      }
+
     }
   }
 }
