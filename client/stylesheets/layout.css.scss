@@ -16,14 +16,57 @@
   font-style:normal;
 }
 
-a.header-brand {
+@font-face {
+  font-family:"taotaojian";
+  src:
+  url("/fonts/taotaojian.ttf") format("truetype"),
+ }
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
+div.navbar.navbar-info.navbar-fixed-top {
+  height: 90px;
+
+}
+
+a.navbar-brand.header-brand {
   padding: 0px;
-  background-color: black;
+  background-color: rgba(255,255,255,0.4);
+  border-radius: 50px;
+  margin-right: 50px;
+  width: 200px;
+  text-align: center;
+  height: 75px;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+  margin-top: 7px;
   .header-logo {
+    display: inline-block;
     img {
       height: 75px;
+      margin-left: -5px;
     }
+  }
+  .header-logo-text {
+    margin-left: -10px;
     display: inline-block;
+    p {
+      font-family: "taotaojian";
+      color: #BD1121;
+      text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+      -moz-text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+      -webkit-text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+      font-size: 50px;
+      transform: translateY(50%);
+    }
   }
 }
 
@@ -37,9 +80,22 @@ a.header-brand {
 
 }
 
-a.tags {
-  padding: 0px !important;
+ul.header-tags {
+  display: block;
+  li.header-tags-container {
+    height: 90px;
+    a.tags {
+      padding: 0px !important;
+      float: left;
+      margin-right: 5px;
+      @include vertical-align;
+    }
+  }
 }
+
+/*=================================================*/
+/*            tag buttons styling                  */
+/*=================================================*/
 
 .font {
   font-family: 'Denne | Pretty Shit';
@@ -49,37 +105,32 @@ a.tags {
 
 .font.heart {
   font-size: 40px;
-  margin-top: -18px;
+  margin-top: -3px;
 }
 
 .font.middle-finger {
   font-weight: bold;
-  margin-top: -8px;
+  margin-top: 3px;
 }
 
 .font.star {
   font-size: 40px;
-  margin-top: -15px;
+  margin-top: 0px;
 }
 
 .font-lol {
   font-family: 'LOL!';
   font-size: 25px;
-  margin-top: -5px;
   margin-left: -5px;
 }
 
-.font-lol.omg {
-  font-size: 20px;
-  margin-top: 0px;
-}
 
 .font.crap {
   font-weight: bold;
-  margin-top: -13px;
+  margin-top: -2px;
 }
 
-.font-lol.nsfw {
+.font-lol.nsfw, .font-lol.omg {
   font-size: 18px;
   margin-top: 0px;
 }
@@ -87,5 +138,24 @@ a.tags {
 .font.die {
   font-size: 40px;
   font-weight: bold;
-  margin-top: -17px;
+  margin-top: -3px;
+}
+
+ul.header-search {
+  display: block;
+  li.header-search-container {
+    height: 90px;
+    .search-button {
+      @include vertical-align;
+      margin-right: 10px;
+    }
+    .search-field {
+      @include vertical-align;
+      margin: 0px;
+      overflow: hidden;
+      padding: 0px;
+      width: 0;
+      display: hidden;
+    }
+  }
 }
