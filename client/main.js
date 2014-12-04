@@ -61,6 +61,7 @@ onYouTubeIframeAPIReady = function () {
 
   Meteor.setInterval(function () {
     if (player.getPlayerState() === 1) {
+
       var videoCurrentTime = player.getCurrentTime();
       // console.log(videoCurrentTime);
       var commentsInInterval = videoData.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
