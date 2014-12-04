@@ -42,8 +42,7 @@ onYouTubeIframeAPIReady = function () {
         value: defaultVolume,
 
         slide: function(event, ui) {
-          var value = $("#volumeSlider").slider('value');
-          player.setVolume(value)
+          player.setVolume(ui.value);
           }
         });
       }
