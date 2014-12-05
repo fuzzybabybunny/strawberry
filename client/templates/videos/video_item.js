@@ -14,7 +14,7 @@ onYouTubeIframeAPIReady = function () {
 
     //playerVars
     playerVars: {
-      controls: 0,
+      controls: 1,
       rel: 0,
       modestbranding: 1,
       showinfo: 0
@@ -76,27 +76,46 @@ onYouTubeIframeAPIReady = function () {
   }, commentInterval);
 
   Meteor.setInterval(function () {
-    if (player.getPlayerState() === 1) {
+    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
       videoData = Comment.find().fetch();
       console.log(videoData);
     }
   }, refreshDataInterval);
 
+  $("#progressBar").progressbar({
+    value: 0
+  });
+
+  updatePlayTime = function(progress) {
+    $('#progressBar .ui-progressbar-value').show().css({'width': $('#progressBar').width() * progress});
+  };
+
   Meteor.setInterval(function () {
-    var VCT = player.getCurrentTime();
-    var DUR = player.getDuration();
-    var progress = VCT / DUR * 100;
-    $("#progressBar").progressbar({
-      value: progress
-    });
+    if(player.getPlayerState() === YT.PlayerState.PLAYING) {
+      var VCT = player.getCurrentTime();
+      var DUR = player.getDuration();
+      var progress = VCT / DUR;
+      updatePlayTime(progress);
+    }
   }, 1000);
 
+  $("#progressBar").click(function(e) {
+    var parentOffset = $(this).parent().offset();
+    var clickX = e.pageX - parentOffset.left;
+    var parentWidth = $(this).parent().width();
+    var videoDuration = player.getDuration();
+    var newProgress = clickX / parentWidth;
+    var newPlayPosition = newProgress * videoDuration;
+    updatePlayTime(newProgress);
+    player.seekTo(newPlayPosition);
+  });
+
   $(".play").click(function() {
-    if (player.getPlayerState() === 1) {
+    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
       player.pauseVideo();
       $(".play").html("Play");
     }
-    else if (player.getPlayerState() !== 1) {
+    else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
       player.playVideo();
       $(".play").html("Pause");
     }
