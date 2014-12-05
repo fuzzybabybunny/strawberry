@@ -1,6 +1,6 @@
 Template.body.helpers({
   comments: function() {
-    return Comments.find({}, {sort: {createdAt: -1}});
+    return Comment.find({}, {sort: {createdAt: -1}});
   }
 });
 
@@ -50,7 +50,7 @@ onYouTubeIframeAPIReady = function () {
     }
   });
 
-  var videoData = Comments.find().fetch();
+  var videoData = Comment.find().fetch();
 
   var commentInterval = 1000;
   var refreshDataInterval = 10000;
@@ -83,7 +83,7 @@ onYouTubeIframeAPIReady = function () {
 
   Meteor.setInterval(function () {
     if (player.getPlayerState() === 1) {
-      videoData = Comments.find().fetch();
+      videoData = Comment.find().fetch();
       console.log(videoData);
     }
   }, refreshDataInterval);
@@ -118,7 +118,7 @@ onYouTubeIframeAPIReady = function () {
     toggleFullScreen();
   });
 
-  var el = document.getElementById("comments")
+  var el = document.getElementById("comments");
   el.addEventListener("keydown", function(e) {
     console.log("keydown");
     if (e.keyCode == 13) {
@@ -132,7 +132,7 @@ onYouTubeIframeAPIReady = function () {
       console.log("keydown: enter",comment);
       // $(".comment-box").text(comment +"@ "+ minutes + ":" + seconds ).animate({'right': '200px'},2000);
       // $(".comment-box").text(comment +"@ "+ minutes + ":" + seconds ).fadeIn('500').delay('1000').fadeOut('500');
-      Comments.insert({text: comment, currentTime: Math.floor(totalSeconds), createdAt: new Date()})
+      Comment.insert({text: comment, currentTime: Math.floor(totalSeconds), createdAt: new Date()});
       $('<div class="comment"></div>').text(comment +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
     }
   }, false);
