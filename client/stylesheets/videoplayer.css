@@ -1,3 +1,7 @@
+.row {
+  margin-top: 100px;
+}
+
 .overlay {
   width: 600px;
   height: 100px;
@@ -30,7 +34,6 @@
 }
 
 .comment-box {
-  /*right: -1100px;*/
   position: relative;
   top: -300px;
   font-size: 20px;
@@ -38,6 +41,7 @@
 
 #comments {
   display: none;
+  color: black;
 }
 
 .comment-summary {
