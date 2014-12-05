@@ -1,0 +1,171 @@
+@import ".meteor/local/build/programs/server/assets/packages/wolves_bourbon/bourbon";
+
+@font-face {
+  font-family: 'Denne | Pretty Shit';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Denne | Pretty Shit'), url('/fonts/Denne-PrettyShit.woff') format('woff');
+}
+
+@font-face {
+  font-family:"LOL!";
+  src:
+  url("/fonts/LOL_.eot?") format("eot"),
+  url("/fonts/LOL_.woff") format("woff"),
+  url("/fonts/LOL_.ttf") format("truetype"),
+  url("/fonts/LOL_.svg#LOL!") format("svg");
+  font-weight:normal;
+  font-style:normal;
+}
+
+@font-face {
+  font-family:"taotaojian";
+  src:
+  url("/fonts/taotaojian.ttf") format("truetype"),
+ }
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  @include transform(translateY(-50%));
+}
+
+@mixin box-shadow($box) {
+  @include prefixer(box-shadow, $box, webkit moz o spec);
+}
+
+@mixin text-shadow($text...) {
+  @include prefixer(text-shadow, $text, webkit moz o spec);
+}
+
+
+div.navbar.navbar-info.navbar-fixed-top {
+  height: 90px;
+}
+
+.box-shadow {
+  @include box-shadow(0px 4px 5px 0px rgba(0,0,0,0.5));
+}
+
+a.navbar-brand.header-brand {
+  padding: 0px;
+  background-color: rgba(255,255,255,0.4);
+  border-radius: 50px;
+  margin-right: 50px;
+  width: 250px;
+  text-align: center;
+  height: 75px;
+  @include box-shadow(5px 5px 5px 0px rgba(0,0,0,0.5));
+  margin-top: 7px;
+  .header-logo {
+    display: inline-block;
+    img {
+      height: 75px;
+      margin-left: -5px;
+    }
+  }
+  .header-logo-text {
+    margin-left: -10px;
+    display: inline-block;
+    p {
+      font-family: "taotaojian";
+      color: #BD1121;
+      @include text-shadow(-2px 0 white, 0 2px white, 2px 0 white, 0 -2px white);
+      font-size: 70px;
+      transform: translateY(70%);
+    }
+  }
+}
+
+ul.header-tags {
+  display: block;
+  li.header-tags-container {
+    height: 90px;
+    a.tags {
+      padding: 0px !important;
+      float: left;
+      margin-right: 5px;
+      @include vertical-align;
+    }
+  }
+}
+
+/*=================================================*/
+/*            tag buttons styling                  */
+/*=================================================*/
+
+.lmao img {
+  margin-left: -8px;
+  margin-top: -7px;
+  width: 43px;
+}
+
+.love img {
+  margin-left: -11px;
+  margin-top: -9px;
+}
+
+.fku img {
+  margin-left: -10px;
+  margin-top: -8px;
+  width: 45px;
+}
+
+.magic img {
+  width: 45px;
+  margin-left: -8px;
+  margin-top: -8px;
+}
+
+.omfg img {
+  width: 52px;
+  margin-left: -12px;
+  margin-top: -2px;
+}
+
+.shite img {
+  margin-left: -8px;
+  margin-top: -7px;
+  width: 43px;
+}
+
+.nsfw img {
+  width: 52px;
+  margin-left: -12px;
+  margin-top: -2px;
+}
+
+.die img {
+  width: 45px;
+  margin-left: -8px;
+  margin-top: -8px;
+}
+
+ul.header-search {
+  display: block;
+  li.header-search-container {
+    height: 90px;
+    .search-button {
+      @include vertical-align;
+      margin-right: 10px;
+    }
+    .search-field {
+      @include vertical-align;
+      margin: 0px;
+      overflow: hidden;
+      padding: 0px;
+      width: 0;
+      display: hidden;
+    }
+  }
+  li.header-login {
+    height: 90px;
+    .login-button {
+      @include vertical-align;
+      i {
+        margin-left: -3px;
+      }
+
+    }
+  }
+}
