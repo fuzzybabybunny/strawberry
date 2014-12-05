@@ -40,7 +40,11 @@
 
 
 div.navbar.navbar-info.navbar-fixed-top {
-  height: 90px;
+  height: 100px;
+}
+
+.navbar-header {
+  height: 100px;
 }
 
 .box-shadow {
@@ -55,8 +59,7 @@ a.navbar-brand.header-brand {
   width: 250px;
   text-align: center;
   height: 75px;
-  @include box-shadow(3px 3px 10px 0px rgba(0,0,0,0.2));
-  margin-top: 7px;
+  @include vertical-align;
   .header-logo {
     display: inline-block;
     img {
@@ -77,16 +80,42 @@ a.navbar-brand.header-brand {
   }
 }
 
+a.navbar-brand.header-brand:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-top: -5px;
+  @include transition(all 500ms ease);
+}
+
+a.navbar-brand.header-brand:active {
+  margin-top: 0px;
+}
+
 ul.header-tags {
   display: block;
   li.header-tags-container {
-    height: 90px;
+    height: 100px;
     a.tags {
       padding: 0px !important;
       float: left;
       margin-right: 5px;
       @include vertical-align;
+      button {
+        box-shadow: none;
+      }
     }
+    a.tags:hover {
+      margin-top: -7px;
+      @include transition(all 200ms ease);
+    }
+    a.tags:hover button {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      @include transition(all 200ms ease);
+    }
+
+    a.tags:active {
+      margin-top: 0px;
+    }
+
   }
 }
 
@@ -94,12 +123,15 @@ ul.header-tags {
 /*            tag buttons styling                  */
 /*=================================================*/
 
-.tags:hover {
-  margin-top: -3px;
-}
 
 .search-button:hover, .login-button:hover {
   margin-top: -3px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  @include transition(all 200ms ease);
+}
+
+.search-button:active, .login-button:active {
+  margin-top: 0px;
 }
 
 .lmao img {
@@ -152,7 +184,7 @@ ul.header-tags {
 ul.header-search {
   display: block;
   li.header-search-container {
-    height: 90px;
+    height: 100px;
     .search-button {
       @include vertical-align;
       margin-right: 10px;
@@ -167,7 +199,7 @@ ul.header-search {
     }
   }
   li.header-login {
-    height: 90px;
+    height: 100px;
     .login-button {
       @include vertical-align;
       i {
