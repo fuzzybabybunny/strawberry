@@ -122,9 +122,13 @@ onYouTubeIframeAPIReady = function () {
   });
 
   $(".comment").click(function() {
-    player.pauseVideo();
-    var comment = $("#comments").val('');
-    $("#comments").slideDown().focus();
+    if ($("#comments").is(":visible")) {
+      $("#comments").slideUp();
+    } else {
+      player.pauseVideo();
+      var comment = $("#comments").val('');
+      $("#comments").slideDown().focus();
+    }
   });
 
   $(".fullscreen").click(function() {
