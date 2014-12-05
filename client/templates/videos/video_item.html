@@ -1,0 +1,37 @@
+<template name="videoItem">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-8">
+
+        <div id="myvideo">
+          <div id="player"></div>
+          <div class="overlay">
+            <div class="comment-box"></div>
+
+            <button class="play btn btn-primary">Play</button>
+
+            <button class="fullscreen btn btn-primary">Fullscreen</button>
+
+            <button class="comment btn btn-primary">Comment</button>
+
+            <button class="comment btn btn-primary">Vote</button>
+
+            <button class="comment btn btn-primary">Share</button>
+
+            <button class="comment btn btn-primary">Setting</button>
+
+            <input type="text" id="comments">
+
+            <div id="volumeSlider"></div>
+
+            <div id="progressBar"></div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {{> commentList}}
+</template>
