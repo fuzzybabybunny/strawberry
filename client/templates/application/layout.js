@@ -4,8 +4,9 @@ $(function () {
   $(".search-button").on('click', function(event) {
     event.preventDefault();
     if ($(".search-field").hasClass('hidden')) {
-      $(".search-field").animate({"width": "200px"}, "fast");
-      $("input.form-control").focus();
+      $(".search-field").animate({"width": "200px"}, "fast", function() {
+        $("input.form-control").focus();
+      });
       $(".search-field").removeClass('hidden');
     } else {
       $(".search-field").animate({"width": "0"}, "fast");
