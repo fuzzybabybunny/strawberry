@@ -32,17 +32,6 @@
   </div>
 </div>
 
-
-<!-- Template 2 -->
-  <div class="comment-summary">
-    {{#each comments}}
-      {{> comment}}
-    {{/each}}
-  </div>
+{{> commentList}}
 
 </body>
-
-<!-- Template 3 -->
-<template name="comment">
-  <div>{{text}} @ {{currentTime}}</div>
-</template>

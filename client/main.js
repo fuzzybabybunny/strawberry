@@ -1,9 +1,3 @@
-Template.body.helpers({
-  comments: function() {
-    return Comment.find({}, {sort: {createdAt: -1}});
-  }
-});
-
 // YouTube API will call onYouTubeIframeAPIReady() when API ready.
 // Make sure it's a global variable.
 onYouTubeIframeAPIReady = function () {
