@@ -75,7 +75,7 @@ a.navbar-brand.header-brand {
       color: #BD1121;
       @include text-shadow(-2px 0 white, 0 2px white, 2px 0 white, 0 -2px white);
       font-size: 70px;
-      transform: translateY(70%);
+      @include transform(translateY(70%));
     }
   }
 }
