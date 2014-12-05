@@ -28,13 +28,6 @@ $(function () {
     return false;
   });
 
-
-  // $( window ).scroll(function() {
-  //   $.data( this, "scrollCheck", setTimeout(function() {
-  //     $( "div.navbar.navbar-info.navbar-fixed-top" ).removeClass('box-shadow');
-  //   }, 2500) );
-  // });
-
   var CurrentScroll = 0;
   $(window).scroll(function(event){
     if (window.scrollY == 0) {
@@ -56,17 +49,10 @@ $(function () {
       $( "div.navbar.navbar-info.navbar-fixed-top" ).fadeIn(200);
 
       //write the codes related to upward-scrolling here
-      // $( "div.navbar.navbar-info.navbar-fixed-top" ).fadeIn("fast");
     }
     //Updates current scroll position
     CurrentScroll = NextScroll;
   });
 
-  // if (window.scrollY >= 300) {
-  //     $( "div.navbar.navbar-info.navbar-fixed-top" ).delay(2000),fadeOut(1000);
-  //   } else if (window.scrollY == 0) {
-  //     $( "div.navbar.navbar-info.navbar-fixed-top" ).fadeIn(1000);
-  //   }
-  // }
 
 })

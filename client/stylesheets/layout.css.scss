@@ -1,3 +1,5 @@
+@import ".meteor/local/build/programs/server/assets/packages/wolves_bourbon/bourbon";
+
 @font-face {
   font-family: 'Denne | Pretty Shit';
   font-style: normal;
@@ -25,9 +27,15 @@
 @mixin vertical-align {
   position: relative;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  @include transform(translateY(-50%));
+}
+
+@mixin box-shadow($box) {
+  @include prefixer(box-shadow, $box, webkit moz o spec);
+}
+
+@mixin text-shadow($text...) {
+  @include prefixer(text-shadow, $text, webkit moz o spec);
 }
 
 
@@ -36,9 +44,7 @@ div.navbar.navbar-info.navbar-fixed-top {
 }
 
 .box-shadow {
-  -webkit-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.5);
-  box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.5);
+  @include box-shadow(0px 4px 5px 0px rgba(0,0,0,0.5));
 }
 
 a.navbar-brand.header-brand {
@@ -49,9 +55,7 @@ a.navbar-brand.header-brand {
   width: 250px;
   text-align: center;
   height: 75px;
-  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
-  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+  @include box-shadow(5px 5px 5px 0px rgba(0,0,0,0.5));
   margin-top: 7px;
   .header-logo {
     display: inline-block;
@@ -66,23 +70,11 @@ a.navbar-brand.header-brand {
     p {
       font-family: "taotaojian";
       color: #BD1121;
-      text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
-      -moz-text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
-      -webkit-text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+      @include text-shadow(-2px 0 white, 0 2px white, 2px 0 white, 0 -2px white);
       font-size: 70px;
       transform: translateY(70%);
     }
   }
-}
-
-.icon-labels.text {
-  font-size: 17px;
-  -ms-transform: rotate(-45deg); /* IE 9 */
-  -webkit-transform: rotate(-45deg); /* Chrome, Safari, Opera */
-  transform: rotate(-45deg);
-  margin-left: -8px;
-  margin-top: 2px;
-
 }
 
 ul.header-tags {
