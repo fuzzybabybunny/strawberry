@@ -55,7 +55,7 @@ a.navbar-brand.header-brand {
   width: 250px;
   text-align: center;
   height: 75px;
-  @include box-shadow(5px 5px 5px 0px rgba(0,0,0,0.5));
+  @include box-shadow(3px 3px 10px 0px rgba(0,0,0,0.2));
   margin-top: 7px;
   .header-logo {
     display: inline-block;
@@ -93,6 +93,14 @@ ul.header-tags {
 /*=================================================*/
 /*            tag buttons styling                  */
 /*=================================================*/
+
+.tags:hover {
+  margin-top: -3px;
+}
+
+.search-button:hover, .login-button:hover {
+  margin-top: -3px;
+}
 
 .lmao img {
   margin-left: -8px;
