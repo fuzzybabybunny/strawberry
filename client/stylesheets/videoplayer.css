@@ -33,7 +33,7 @@
   /*right: -1100px;*/
   position: relative;
   top: -300px;
-  font-size: 30px;
+  font-size: 20px;
 }
 
 #comments {
@@ -55,5 +55,5 @@
 /*            PROGRESS BAR  CSS                  */
 /*===============================================*/
 #progressBar {
-    width: 1200px;
+    width: 100%;
 }
