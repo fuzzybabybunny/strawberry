@@ -40,11 +40,11 @@
 
 
 div.navbar.navbar-info.navbar-fixed-top {
-  height: 100px;
+  height: 90px;
 }
 
 .navbar-header {
-  height: 100px;
+  height: 90px;
 }
 
 .box-shadow {
@@ -93,7 +93,7 @@ a.navbar-brand.header-brand:active {
 ul.header-tags {
   display: block;
   li.header-tags-container {
-    height: 100px;
+    height: 90px;
     a.tags {
       padding: 0px !important;
       float: left;
@@ -184,7 +184,7 @@ ul.header-tags {
 ul.header-search {
   display: block;
   li.header-search-container {
-    height: 100px;
+    height: 90px;
     .search-button {
       @include vertical-align;
       margin-right: 10px;
@@ -199,7 +199,7 @@ ul.header-search {
     }
   }
   li.header-login {
-    height: 100px;
+    height: 90px;
     .login-button {
       @include vertical-align;
       i {
