@@ -36,7 +36,12 @@ $(function () {
 
   var CurrentScroll = 0;
   $(window).scroll(function(event){
-    $( "div.navbar.navbar-info.navbar-fixed-top" ).addClass('box-shadow');
+    if (window.scrollY == 0) {
+      $( "div.navbar.navbar-info.navbar-fixed-top" ).removeClass('box-shadow');
+    } else {
+      $( "div.navbar.navbar-info.navbar-fixed-top" ).addClass('box-shadow');
+    }
+
     var NextScroll = $(this).scrollTop();
     if (NextScroll > CurrentScroll){
 
