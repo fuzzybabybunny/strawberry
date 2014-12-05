@@ -46,19 +46,36 @@
 }
 
 .comment-summary {
-  margin-top: 110px;
+  margin-top: 310px;
 }
 
 /*===============================================*/
 /*            VOLUME SLIDER CSS                  */
 /*===============================================*/
 #volumeSlider {
-    width: 100px;
+  width: 100px;
 }
 
 /*===============================================*/
 /*            PROGRESS BAR  CSS                  */
 /*===============================================*/
 #progressBar {
-    width: 100%;
+  width: 100%;
+}
+
+/*===============================================*/
+/*            COMMENT BAR  CSS                   */
+/*===============================================*/
+#commentBar {
+  width: 500px;
+  height: 30px;
+  background: blue;
+  padding: 0px;
+}
+
+.commentBarNotch {
+  width: 2px;
+  height: 30px;
+  background: red;
+  z-index: 10;
 }
