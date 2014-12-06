@@ -34,6 +34,29 @@ onYouTubeIframeAPIReady = function () {
         }
       });
 
+      var videoData = Comment.find().fetch();
+
+      var videoOldTime = 0;
+
+      Meteor.setInterval(function () {
+        if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+
+          var videoCurrentTime = player.getCurrentTime();
+          var commentsInInterval = videoData.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
+
+          if (commentsInInterval.length > 0 && videoCurrentTime - videoOldTime <= MIN_TIME_LAPSE) {
+            commentsInInterval.forEach(function(commentObj) {
+              totalSeconds = videoCurrentTime;
+              minutes = Math.floor(totalSeconds / 60);
+              seconds = Math.floor(totalSeconds % 60);
+              $('<div class="comment"></div>').text(commentObj.text +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+            });
+
+          }
+          videoOldTime = videoCurrentTime;
+        }
+      }, DISPLAY_COMMENT_INTERVAL);
+
       Meteor.setInterval(function () {
         if(player.getPlayerState() === YT.PlayerState.PLAYING) {
           var videoCurrentTime = player.getCurrentTime();
@@ -53,38 +76,15 @@ onYouTubeIframeAPIReady = function () {
       onStateChange: function (event) {
         if (player.getPlayerState() === YT.PlayerState.PLAYING) {
           $(".play").html("Pause");
-          console.log("set pause");
         }
         else if (player.getPlayerState() === YT.PlayerState.PAUSED) {
           $(".play").html("Play");
-          console.log("set play");
         }
       }
     }
   });
 
-  var videoData = Comment.find().fetch();
 
-  var videoOldTime = 0;
-
-  Meteor.setInterval(function () {
-    if (player.getPlayerState() === 1) {
-
-      var videoCurrentTime = player.getCurrentTime();
-      var commentsInInterval = videoData.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
-
-      if (commentsInInterval.length > 0 && videoCurrentTime - videoOldTime <= MIN_TIME_LAPSE) {
-        commentsInInterval.forEach(function(commentObj) {
-          totalSeconds = videoCurrentTime;
-          minutes = Math.floor(totalSeconds / 60);
-          seconds = Math.floor(totalSeconds % 60);
-          $('<div class="comment"></div>').text(commentObj.text +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
-        });
-
-      }
-      videoOldTime = videoCurrentTime;
-    }
-  }, DISPLAY_COMMENT_INTERVAL);
 
   $("#progressBar").progressbar({
     value: 0
@@ -115,6 +115,7 @@ onYouTubeIframeAPIReady = function () {
     });
 
   function fillCommentBar() {
+    var videoData = Comment.find().fetch();
     videoData.forEach(function (comment) {
       console.log(comment.text, comment.currentTime);
       $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+'></div>');
@@ -146,8 +147,8 @@ onYouTubeIframeAPIReady = function () {
     toggleFullScreen();
   });
 
-  var el = document.getElementById("comments");
-  el.addEventListener("keydown", function(e) {
+  var commentInput = document.getElementById("comments");
+  commentInput.addEventListener("keydown", function(e) {
     console.log("keydown");
     if (e.keyCode == 13) {
       $("#comments").slideUp();
@@ -156,14 +157,12 @@ onYouTubeIframeAPIReady = function () {
       totalSeconds = player.getCurrentTime();
       minutes = Math.floor(totalSeconds / 60);
       seconds = Math.floor(totalSeconds % 60);
-      console.log("keydown: enter", comment);
       Comment.insert({text: comment, currentTime: Math.floor(totalSeconds), createdAt: new Date()});
       $('<div class="comment"></div>').text(comment +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
     }
   }, false);
 
   var videoElement = document.getElementById("myvideo");
-
   function toggleFullScreen() {
     if (!document.mozFullScreen && !document.webkitFullScreen) {
       if (videoElement.mozRequestFullScreen) {
@@ -179,6 +178,7 @@ onYouTubeIframeAPIReady = function () {
       }
     }
   }
+
 };
 
 YT.load();
