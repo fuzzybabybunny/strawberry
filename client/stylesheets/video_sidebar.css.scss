@@ -24,3 +24,21 @@ div.card {
   margin-bottom: -35px;
   margin-left: -15px;
 }
+
+#animate {
+  display: inline;
+}
+
+#freeze {
+  display: inline;
+}
+
+.play-gif {
+  position: relative;
+  z-index: 10;
+  text-align: right;
+  margin-right: 10px;
+  font-size: 40px;
+  color: whitesmoke;
+  display: none;
+}
