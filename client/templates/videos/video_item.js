@@ -1,54 +1,69 @@
-// YouTube API will call onYouTubeIframeAPIReady() when API ready.
-// Make sure it's a global variable.
+var DISPLAY_COMMENT_INTERVAL = 1000;
+var LOAD_COMMENT_INTERVAL = 10000;
+var MIN_TIME_LAPSE = 2;
+var REFRESH_VIDEO_PROGRESS = 1000;
+
 onYouTubeIframeAPIReady = function () {
 
-  // New Video Player, the first argument is the id of the div.
-  // Make sure it's a global variable.
   player = new YT.Player("player", {
 
     height: "400",
     width: "600",
-
-    // videoId is the "v" in URL (ex: http://www.youtube.com/watch?v=LdH1hSWGFGU, videoId = "LdH1hSWGFGU")
     videoId: "LdH1hSWGFGU",
 
-    //playerVars
     playerVars: {
       controls: 0,
       rel: 0,
       modestbranding: 1,
       showinfo: 0
-
     },
 
-    // Events like ready, state change,
     events: {
       onReady: function (event) {
         console.log("video is ready");
         // Play video when player ready.
         // event.target.playVideo();
-        // ^^^^^^^^^^^^^^^^^^^^^^^^ commented out for now so it doesn't autoplay every hot code push
 
       var defaultVolume = player.getVolume();
 
       $("#volumeSlider").slider({
         range: "min",
         value: defaultVolume,
-
         slide: function(event, ui) {
           player.setVolume(ui.value);
-          }
-        });
-      }
+        }
+      });
 
+      Meteor.setInterval(function () {
+        if(player.getPlayerState() === YT.PlayerState.PLAYING) {
+          var videoCurrentTime = player.getCurrentTime();
+          var videoDuration = player.getDuration();
+          var videoProgress = videoCurrentTime / videoDuration;
+          updatePlayTime(videoProgress);
+        }
+      }, REFRESH_VIDEO_PROGRESS);
+
+      Meteor.setInterval(function () {
+        if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+          videoData = Comment.find().fetch();
+        }
+      }, LOAD_COMMENT_INTERVAL);
+
+      },
+      onStateChange: function (event) {
+        if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+          $(".play").html("Pause");
+          console.log("set pause");
+        }
+        else if (player.getPlayerState() === YT.PlayerState.PAUSED) {
+          $(".play").html("Play");
+          console.log("set play");
+        }
+      }
     }
   });
 
   var videoData = Comment.find().fetch();
-
-  var commentInterval = 1000;
-  var refreshDataInterval = 10000;
-  var minTimeLapse = 2;
 
   var videoOldTime = 0;
 
@@ -58,7 +73,7 @@ onYouTubeIframeAPIReady = function () {
       var videoCurrentTime = player.getCurrentTime();
       var commentsInInterval = videoData.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
 
-      if (commentsInInterval.length > 0 && videoCurrentTime - videoOldTime <= minTimeLapse) {
+      if (commentsInInterval.length > 0 && videoCurrentTime - videoOldTime <= MIN_TIME_LAPSE) {
         commentsInInterval.forEach(function(commentObj) {
           totalSeconds = videoCurrentTime;
           minutes = Math.floor(totalSeconds / 60);
@@ -69,14 +84,7 @@ onYouTubeIframeAPIReady = function () {
       }
       videoOldTime = videoCurrentTime;
     }
-  }, commentInterval);
-
-  Meteor.setInterval(function () {
-    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-      videoData = Comment.find().fetch();
-      console.log(videoData);
-    }
-  }, refreshDataInterval);
+  }, DISPLAY_COMMENT_INTERVAL);
 
   $("#progressBar").progressbar({
     value: 0
@@ -85,15 +93,6 @@ onYouTubeIframeAPIReady = function () {
   updatePlayTime = function(progress) {
     $('#progressBar .ui-progressbar-value').show().css({'width': $('#progressBar').width() * progress});
   };
-
-  Meteor.setInterval(function () {
-    if(player.getPlayerState() === YT.PlayerState.PLAYING) {
-      var videoCurrentTime = player.getCurrentTime();
-      var videoDuration = player.getDuration();
-      var videoProgress = videoCurrentTime / videoDuration;
-      updatePlayTime(videoProgress);
-    }
-  }, 1000);
 
   $("#progressBar").click(function(e) {
     var parentOffset = $(this).parent().offset();
@@ -127,11 +126,9 @@ onYouTubeIframeAPIReady = function () {
   $(".play").click(function() {
     if (player.getPlayerState() === YT.PlayerState.PLAYING) {
       player.pauseVideo();
-      $(".play").html("Play");
     }
     else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
       player.playVideo();
-      $(".play").html("Pause");
     }
   });
 
