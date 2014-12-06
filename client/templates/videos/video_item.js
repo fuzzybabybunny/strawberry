@@ -72,6 +72,7 @@ onYouTubeIframeAPIReady = function () {
         }
       }, LOAD_COMMENT_INTERVAL);
 
+
       },
       onStateChange: function (event) {
         if (player.getPlayerState() === YT.PlayerState.PLAYING) {
