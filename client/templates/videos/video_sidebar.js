@@ -14,7 +14,7 @@ $(function() {
       setTimeout(function() {
         $(that).parent().next().next().find(".animate").css("display", "none");
         $(that).removeClass('fa-pause').addClass('fa-play-circle-o').css('font-size', '40px');
-      }, 5000);
+      }, 4000);
 
     });
 
