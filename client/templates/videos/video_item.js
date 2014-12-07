@@ -1,185 +1,188 @@
-var DISPLAY_COMMENT_INTERVAL = 1000;
-var LOAD_COMMENT_INTERVAL = 10000;
-var MIN_TIME_LAPSE = 2;
-var REFRESH_VIDEO_PROGRESS = 1000;
+Template.videoItem.rendered = function(){
 
-onYouTubeIframeAPIReady = function () {
+  var DISPLAY_COMMENT_INTERVAL = 1000;
+  var LOAD_COMMENT_INTERVAL = 10000;
+  var MIN_TIME_LAPSE = 2;
+  var REFRESH_VIDEO_PROGRESS = 1000;
 
-  player = new YT.Player("player", {
+  onYouTubeIframeAPIReady = function () {
 
-    height: "400",
-    width: "600",
-    videoId: "LdH1hSWGFGU",
+    player = new YT.Player("player", {
 
-    playerVars: {
-      controls: 0,
-      rel: 0,
-      modestbranding: 1,
-      showinfo: 0
-    },
+      height: "400",
+      width: "600",
+      videoId: "LdH1hSWGFGU",
 
-    events: {
-      onReady: function (event) {
-        console.log("video is ready");
-        // Play video when player ready.
-        // event.target.playVideo();
+      playerVars: {
+        controls: 0,
+        rel: 0,
+        modestbranding: 1,
+        showinfo: 0
+      },
 
-      var defaultVolume = player.getVolume();
+      events: {
+        onReady: function (event) {
+          console.log("video is ready");
+          // Play video when player ready.
+          // event.target.playVideo();
 
-      $("#volumeSlider").slider({
-        range: "min",
-        value: defaultVolume,
-        slide: function(event, ui) {
-          player.setVolume(ui.value);
+        var defaultVolume = player.getVolume();
+
+        $("#volumeSlider").slider({
+          range: "min",
+          value: defaultVolume,
+          slide: function(event, ui) {
+            player.setVolume(ui.value);
+          }
+        });
+
+        var videoData = Comment.find().fetch();
+
+        var videoOldTime = 0;
+
+        Meteor.setInterval(function () {
+          if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+
+            var videoCurrentTime = player.getCurrentTime();
+            var commentsInInterval = videoData.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
+
+            if (commentsInInterval.length > 0 && videoCurrentTime - videoOldTime <= MIN_TIME_LAPSE) {
+              commentsInInterval.forEach(function(commentObj) {
+                totalSeconds = videoCurrentTime;
+                minutes = Math.floor(totalSeconds / 60);
+                seconds = Math.floor(totalSeconds % 60);
+                $('<div class="comment"></div>').text(commentObj.text +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+              });
+
+            }
+            videoOldTime = videoCurrentTime;
+          }
+        }, DISPLAY_COMMENT_INTERVAL);
+
+        Meteor.setInterval(function () {
+          if(player.getPlayerState() === YT.PlayerState.PLAYING) {
+            var videoCurrentTime = player.getCurrentTime();
+            var videoDuration = player.getDuration();
+            var videoProgress = videoCurrentTime / videoDuration;
+            updatePlayTime(videoProgress);
+          }
+        }, REFRESH_VIDEO_PROGRESS);
+
+        Meteor.setInterval(function () {
+          if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+            videoData = Comment.find().fetch();
+          }
+        }, LOAD_COMMENT_INTERVAL);
+
+
+        },
+        onStateChange: function (event) {
+          if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+            $(".play").html("Pause");
+          }
+          else if (player.getPlayerState() === YT.PlayerState.PAUSED) {
+            $(".play").html("Play");
+          }
         }
+      }
+    });
+
+
+
+    $("#progressBar").progressbar({
+      value: 0
+    });
+
+    updatePlayTime = function(progress) {
+      $('#progressBar .ui-progressbar-value').show().css({'width': $('#progressBar').width() * progress});
+    };
+
+    $("#progressBar").click(function(e) {
+      var parentOffset = $(this).parent().offset();
+      var clickX = e.pageX - parentOffset.left;
+      var parentWidth = $(this).parent().width();
+      var videoDuration = player.getDuration();
+      var newProgress = clickX / parentWidth;
+      var newPlayPosition = newProgress * videoDuration;
+      updatePlayTime(newProgress);
+      player.seekTo(newPlayPosition);
+    });
+
+    $("#commentBar div").hover(
+      function() {
+        var id = $("#commentBar div").attr('id');
+        console.log("mouse in "+id);
+      },
+      function() {
+        console.log("mouse out");
       });
 
+    function fillCommentBar() {
       var videoData = Comment.find().fetch();
+      videoData.forEach(function (comment) {
+        console.log(comment.text, comment.currentTime);
+        $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+'></div>');
+      });
+    }
 
-      var videoOldTime = 0;
+    fillCommentBar();
 
-      Meteor.setInterval(function () {
-        if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+    $(".play").click(function() {
+      if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+        player.pauseVideo();
+      }
+      else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
+        player.playVideo();
+      }
+    });
 
-          var videoCurrentTime = player.getCurrentTime();
-          var commentsInInterval = videoData.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
+    $(".comment").click(function() {
+      if ($("#comments").is(":visible")) {
+        $("#comments").slideUp();
+      } else {
+        player.pauseVideo();
+        var comment = $("#comments").val('');
+        $("#comments").slideDown().focus();
+      }
+    });
 
-          if (commentsInInterval.length > 0 && videoCurrentTime - videoOldTime <= MIN_TIME_LAPSE) {
-            commentsInInterval.forEach(function(commentObj) {
-              totalSeconds = videoCurrentTime;
-              minutes = Math.floor(totalSeconds / 60);
-              seconds = Math.floor(totalSeconds % 60);
-              $('<div class="comment"></div>').text(commentObj.text +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
-            });
+    $(".fullscreen").click(function() {
+      toggleFullScreen();
+    });
 
-          }
-          videoOldTime = videoCurrentTime;
+    var commentInput = document.getElementById("comments");
+    commentInput.addEventListener("keydown", function(e) {
+      console.log("keydown");
+      if (e.keyCode == 13) {
+        $("#comments").slideUp();
+        player.playVideo();
+        var comment = $("#comments").val();
+        totalSeconds = player.getCurrentTime();
+        minutes = Math.floor(totalSeconds / 60);
+        seconds = Math.floor(totalSeconds % 60);
+        Comment.insert({text: comment, currentTime: Math.floor(totalSeconds), createdAt: new Date()});
+        $('<div class="comment"></div>').text(comment +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+      }
+    }, false);
+
+    var videoElement = document.getElementById("myvideo");
+    function toggleFullScreen() {
+      if (!document.mozFullScreen && !document.webkitFullScreen) {
+        if (videoElement.mozRequestFullScreen) {
+          videoElement.mozRequestFullScreen();
+        } else {
+          videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
         }
-      }, DISPLAY_COMMENT_INTERVAL);
-
-      Meteor.setInterval(function () {
-        if(player.getPlayerState() === YT.PlayerState.PLAYING) {
-          var videoCurrentTime = player.getCurrentTime();
-          var videoDuration = player.getDuration();
-          var videoProgress = videoCurrentTime / videoDuration;
-          updatePlayTime(videoProgress);
-        }
-      }, REFRESH_VIDEO_PROGRESS);
-
-      Meteor.setInterval(function () {
-        if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-          videoData = Comment.find().fetch();
-        }
-      }, LOAD_COMMENT_INTERVAL);
-
-
-      },
-      onStateChange: function (event) {
-        if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-          $(".play").html("Pause");
-        }
-        else if (player.getPlayerState() === YT.PlayerState.PAUSED) {
-          $(".play").html("Play");
+      } else {
+        if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else {
+          document.webkitCancelFullScreen();
         }
       }
     }
-  });
 
-
-
-  $("#progressBar").progressbar({
-    value: 0
-  });
-
-  updatePlayTime = function(progress) {
-    $('#progressBar .ui-progressbar-value').show().css({'width': $('#progressBar').width() * progress});
   };
 
-  $("#progressBar").click(function(e) {
-    var parentOffset = $(this).parent().offset();
-    var clickX = e.pageX - parentOffset.left;
-    var parentWidth = $(this).parent().width();
-    var videoDuration = player.getDuration();
-    var newProgress = clickX / parentWidth;
-    var newPlayPosition = newProgress * videoDuration;
-    updatePlayTime(newProgress);
-    player.seekTo(newPlayPosition);
-  });
-
-  $("#commentBar div").hover(
-    function() {
-      var id = $("#commentBar div").attr('id');
-      console.log("mouse in "+id);
-    },
-    function() {
-      console.log("mouse out");
-    });
-
-  function fillCommentBar() {
-    var videoData = Comment.find().fetch();
-    videoData.forEach(function (comment) {
-      console.log(comment.text, comment.currentTime);
-      $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+'></div>');
-    });
-  }
-
-  fillCommentBar();
-
-  $(".play").click(function() {
-    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-      player.pauseVideo();
-    }
-    else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
-      player.playVideo();
-    }
-  });
-
-  $(".comment").click(function() {
-    if ($("#comments").is(":visible")) {
-      $("#comments").slideUp();
-    } else {
-      player.pauseVideo();
-      var comment = $("#comments").val('');
-      $("#comments").slideDown().focus();
-    }
-  });
-
-  $(".fullscreen").click(function() {
-    toggleFullScreen();
-  });
-
-  var commentInput = document.getElementById("comments");
-  commentInput.addEventListener("keydown", function(e) {
-    console.log("keydown");
-    if (e.keyCode == 13) {
-      $("#comments").slideUp();
-      player.playVideo();
-      var comment = $("#comments").val();
-      totalSeconds = player.getCurrentTime();
-      minutes = Math.floor(totalSeconds / 60);
-      seconds = Math.floor(totalSeconds % 60);
-      Comment.insert({text: comment, currentTime: Math.floor(totalSeconds), createdAt: new Date()});
-      $('<div class="comment"></div>').text(comment +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
-    }
-  }, false);
-
-  var videoElement = document.getElementById("myvideo");
-  function toggleFullScreen() {
-    if (!document.mozFullScreen && !document.webkitFullScreen) {
-      if (videoElement.mozRequestFullScreen) {
-        videoElement.mozRequestFullScreen();
-      } else {
-        videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-      }
-    } else {
-      if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else {
-        document.webkitCancelFullScreen();
-      }
-    }
-  }
-
+  YT.load();
 };
-
-YT.load();
