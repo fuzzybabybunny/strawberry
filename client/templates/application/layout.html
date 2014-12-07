@@ -1,24 +1,22 @@
-<head>
-  <title>潮媒</title>
-</head>
+<template name="layout">
+  <body>
 
-<body>
+    {{> header}}
 
-  {{> header}}
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-8">
+          {{> videoItem}}
+        </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-8">
-        {{> videoItem}}
+        <div class="col-xs-4">
+          {{> videoSidebar}}
+        </div>
+
       </div>
-
-      <div class="col-xs-4">
-        {{> videoSidebar}}
-      </div>
-
     </div>
-  </div>
 
+    {{> yield}}
 
-
-</body>
+  </body>
+</template>
