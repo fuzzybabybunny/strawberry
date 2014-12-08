@@ -1,22 +1,10 @@
 <template name="layout">
   <body>
-
     {{> header}}
-
     <div class="container">
       <div class="row">
-        <div class="col-xs-8">
-          {{> videoItem}}
-        </div>
-
-        <div class="col-xs-4">
-          {{> videoSidebar}}
-        </div>
-
+        {{> yield}}
       </div>
     </div>
-
-    {{> yield}}
-
   </body>
 </template>

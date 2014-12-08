@@ -118,7 +118,7 @@ Template.videoItem.rendered = function(){
       });
 
     function fillCommentBar() {
-      var videoData = Comment.find().fetch();
+      // var videoData = Comment.find().fetch();
       videoData.forEach(function (comment) {
         console.log(comment.text, comment.currentTime);
         $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+'></div>');
