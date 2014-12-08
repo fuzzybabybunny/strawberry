@@ -28,7 +28,7 @@ Template.layout.rendered = function(){
     // });
 
 
-    $(".dropdown-toggle").on('click', function(event) {
+    $(".login-button").on('click', function(event) {
       event.preventDefault();
       if ($(".dropdown").hasClass('slided') === false) {
         $(".dropdown").addClass('slided');
