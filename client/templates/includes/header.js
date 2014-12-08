@@ -1,4 +1,4 @@
-Template.layout.rendered = function(){
+Template.header.rendered = function(){
 
   $(function () {
 
@@ -16,17 +16,6 @@ Template.layout.rendered = function(){
       }
       return false;
     });
-
-    // $('body').delegate('a.dropdown-toggle', 'click', function(e) {
-    //   e.preventDefault();
-    //   console.log("dsfsadf");
-    //   if($('.dropdown').hasClass('open') === false) {
-    //     $('.dropdown').addClass('open');
-    //   } else {
-    //     $('.dropdown').removeClass('open');
-    //   }
-    // });
-
 
     $(".login-button").on('click', function(event) {
       event.preventDefault();

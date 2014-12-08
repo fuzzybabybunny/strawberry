@@ -5,51 +5,47 @@
 .video-container {
   margin-top: 10px;
   height: 600px;
-}
-
-#video-title {
-  h1 {
-    margin-top: 0px;
+  #video-title {
+    h1 {
+      margin-top: 0px;
+    }
   }
-}
-
-.overlay {
-  width: 100%;
-  height: 100px;
-  background-color: rgba(255, 0, 0, 0);
-  color: white;
-  margin-top: -285px;
-  position: relative;
-  z-index: 1000;
-}
-
-.commentaries {
-  margin-left: 0px;
-}
-
-#player {
-  width: 100%;
-  height: 500px;
-  padding: 0px;
-}
-
-:-webkit-full-screen #myvideo {
-  width: 100%;
-  height: 100%;
 }
 
 #myvideo {
   margin: 0px;
   padding: 0px;
   width: 100%;
+  position: relative;
+  height: 500px;
+  #player {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+  }
 }
 
-.comment-box {
+.overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(5, 50, 5, 1);
+  color: white;
+  margin-top: -505px;
   position: relative;
-  top: -160px;
-  font-size: 20px;
-  height: 50px;
+  z-index: 1000;
+  .comment-box {
+    position: relative;
+    font-size: 20px;
+    height: 50px;
+  }
 }
+
+
+:-webkit-full-screen #myvideo {
+  width: 100%;
+  height: 100%;
+}
+
 
 #comments {
   display: none;

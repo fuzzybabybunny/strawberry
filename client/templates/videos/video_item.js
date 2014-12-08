@@ -78,10 +78,10 @@ Template.videoItem.rendered = function(){
         },
         onStateChange: function (event) {
           if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-            $(".play").html("Pause");
+            $(".play").html("<i class='fa fa-pause'></i>");
           }
           else if (player.getPlayerState() === YT.PlayerState.PAUSED) {
-            $(".play").html("Play");
+            $(".play").html("<i class='fa fa-play'></i>");
           }
         }
       }
