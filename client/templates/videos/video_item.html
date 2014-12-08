@@ -9,25 +9,28 @@
       <div id="player"></div>
       <div class="overlay">
 
-        <div class="comment-display">
+        <div id="comment-display">
           <div id="commentBar"></div>
           <div class="comment-box"></div>
         </div>
 
-        <div class="social-controller">
-          <button class="comment btn btn-primary">Comment</button>
-          <input type="text" id="comments">
-          <button class="vote btn btn-primary">Vote</button>
-          <button class="share btn btn-primary">Share</button>
+        <div id="social-controller">
+          <button class="comment btn btn-success btn-fab btn-raised"><i class="md md-textsms"></i></button>
+          <button class="vote btn btn-success btn-fab btn-raised"><i class="md md-mood"></i></button>
+          <button class="share btn btn-success btn-fab btn-raised"><i class="md md-share"></i></button>
+          <div>
+            <input type="text" id="comments">
+          </div>
         </div>
 
-        <div class="player-controller">
+        <div id="player-controller">
           <div class="play"><i class="fa fa-play"></i></div>
-          <div class="fullscreen"><i class="fa fa-expand"></i></div>
-          <button class="setting btn btn-primary">Setting</button>
+          <div id="progressBar"></div>
+          <div class="volume"><i class="fa fa-volume-up"></i></div>
           <div id="volumeSlider"></div>
+          <div class="setting"><i class="fa fa-cog"></i></div>
+          <div class="fullscreen"><i class="md md-aspect-ratio"></i></div>
         </div>
-        <div id="progressBar"></div>
 
 
 
