@@ -36,7 +36,7 @@ Template.videoItem.rendered = function(){
           }
         });
 
-        var videoData = Comment.find().fetch();
+        var videoData = Comments.find().fetch();
 
         var videoOldTime = 0;
 
@@ -51,7 +51,7 @@ Template.videoItem.rendered = function(){
                 totalSeconds = videoCurrentTime;
                 minutes = Math.floor(totalSeconds / 60);
                 seconds = Math.floor(totalSeconds % 60);
-                $('<div class="comment"></div>').text(commentObj.text +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+                $('<div class="comment"></div>').text(commentObj.author + " : " + commentObj.text + "@ " + minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
               });
 
             }
@@ -70,7 +70,7 @@ Template.videoItem.rendered = function(){
 
         Meteor.setInterval(function () {
           if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-            videoData = Comment.find().fetch();
+            videoData = Comments.find().fetch();
           }
         }, LOAD_COMMENT_INTERVAL);
 
@@ -118,7 +118,7 @@ Template.videoItem.rendered = function(){
       });
 
     function fillCommentBar() {
-      var videoData = Comment.find().fetch();
+      var videoData = Comments.find().fetch();
       videoData.forEach(function (comment) {
         console.log(comment.text, comment.currentTime);
         $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+'></div>');
@@ -156,12 +156,29 @@ Template.videoItem.rendered = function(){
       if (e.keyCode == 13) {
         $("#comments").slideUp();
         player.playVideo();
-        var comment = $("#comments").val();
+        var commentText = $("#comments").val();
         totalSeconds = player.getCurrentTime();
         minutes = Math.floor(totalSeconds / 60);
         seconds = Math.floor(totalSeconds % 60);
-        Comment.insert({text: comment, currentTime: Math.floor(totalSeconds), createdAt: new Date()});
-        $('<div class="comment"></div>').text(comment +"@ "+ minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+
+        // Comment.insert({text: comment, currentTime: Math.floor(totalSeconds), createdAt: new Date()});
+
+        var comment = {
+          text: commentText,
+          currentTime: Math.floor(totalSeconds)
+        };
+
+        console.log(comment);
+
+        Meteor.call('commentInsert', comment, function(error, result) {
+
+          if (error)
+            return alert(error.reason);
+
+        });
+
+
+        $('<div class="comment"></div>').text(Meteor.user().username + " : " + commentText + "@ " + minutes + ":" + seconds).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
       }
     }, false);
 
