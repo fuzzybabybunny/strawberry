@@ -188,6 +188,20 @@ Template.videoItem.rendered = function(){
       }
     }
 
+    $(".vote").hover(
+      function() {
+        $("#vote-icons").slideDown('400');
+      }, function() {
+        $("#vote-icons").slideUp('400');
+      });
+
+    $("#vote-icons").hover(
+      function() {
+        $("#vote-icons").slideDown('400');
+      }, function() {
+        $("#vote-icons").slideUp('400');
+      });
+
   };
 
   YT.load();

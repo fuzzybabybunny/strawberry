@@ -18,14 +18,35 @@
           <button class="comment btn btn-success btn-fab btn-raised"><i class="md md-textsms"></i></button>
           <button class="vote btn btn-success btn-fab btn-raised"><i class="md md-mood"></i></button>
           <button class="share btn btn-success btn-fab btn-raised"><i class="md md-share"></i></button>
-          <div>
-            <input type="text" id="comments">
-          </div>
         </div>
+        <!-- social controller dropdowns -->
+        <div id="comment-textarea">
+          <textarea type="text" id="comments" rows="5" placeholder="Speak your mind... Hit 'enter' to submit" ></textarea>
+        </div>
+
+        <div id="vote-icons">
+          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="lmao"><img src="/images/lmao.png"></div></button>
+
+          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="love"><img src="/images/love.png"></div></button>
+
+          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="fku"><img src="/images/fku.png"></div></button>
+
+          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="magic"><img src="/images/magic.png"></div></button>
+
+          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="omfg"><img src="/images/omfg.png"></div></button>
+
+          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="shite"><img src="/images/shite.png"></div></button>
+
+          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="nsfw"><img src="/images/nsfw.png"></div></button>
+
+          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="die"><img src="/images/die.png"></div></button>
+        </div>
+
+
 
         <div id="player-controller">
           <div class="play"><i class="fa fa-play"></i></div>
-          <div id="progressBar"></div>
+          <div class="progressBar-wrapper"><div id="progressBar"></div></div>
           <div class="volume"><i class="fa fa-volume-up"></i></div>
           <div id="volumeSlider"></div>
           <div class="setting"><i class="fa fa-cog"></i></div>
