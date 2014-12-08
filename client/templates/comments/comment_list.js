@@ -1,5 +1,5 @@
 Template.commentList.helpers({
   comments: function() {
-    return Comment.find({}, {sort: {createdAt: -1}});
+    return Comments.find({}, {sort: {createdAt: -1}});
   }
 });
