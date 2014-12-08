@@ -74,6 +74,7 @@ Template.videoItem.rendered = function(){
           }
         }, LOAD_COMMENT_INTERVAL);
 
+        fillCommentBar();
 
         },
         onStateChange: function (event) {
@@ -108,9 +109,9 @@ Template.videoItem.rendered = function(){
       player.seekTo(newPlayPosition);
     });
 
-    $("#commentBar div").hover(
+    $(".commentBarNotch").hover(
       function() {
-        var id = $("#commentBar div").attr('id');
+        var id = $(".commentBarNotch").attr('id');
         console.log("mouse in "+id);
       },
       function() {
@@ -124,8 +125,6 @@ Template.videoItem.rendered = function(){
         $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+'></div>');
       });
     }
-
-    fillCommentBar();
 
     $(".play").click(function() {
       if (player.getPlayerState() === YT.PlayerState.PLAYING) {
@@ -160,24 +159,14 @@ Template.videoItem.rendered = function(){
         totalSeconds = player.getCurrentTime();
         minutes = Math.floor(totalSeconds / 60);
         seconds = Math.floor(totalSeconds % 60);
-
-        // Comment.insert({text: comment, currentTime: Math.floor(totalSeconds), createdAt: new Date()});
-
         var comment = {
           text: commentText,
           currentTime: Math.floor(totalSeconds)
         };
-
-        console.log(comment);
-
         Meteor.call('commentInsert', comment, function(error, result) {
-
           if (error)
             return alert(error.reason);
-
         });
-
-
         $('<div class="comment"></div>').text(Meteor.user().username + " : " + commentText + "@ " + minutes + ":" + seconds).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
       }
     }, false);
