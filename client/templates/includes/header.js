@@ -1,4 +1,4 @@
-Template.header.rendered = function(){
+Template.layout.rendered = function(){
 
   $(function () {
 
@@ -16,6 +16,17 @@ Template.header.rendered = function(){
       }
       return false;
     });
+
+    // $('body').delegate('a.dropdown-toggle', 'click', function(e) {
+    //   e.preventDefault();
+    //   console.log("dsfsadf");
+    //   if($('.dropdown').hasClass('open') === false) {
+    //     $('.dropdown').addClass('open');
+    //   } else {
+    //     $('.dropdown').removeClass('open');
+    //   }
+    // });
+
 
     $(".dropdown-toggle").on('click', function(event) {
       event.preventDefault();
