@@ -1,5 +1,10 @@
 @import ".meteor/local/build/programs/server/assets/packages/wolves_bourbon/bourbon";
 
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  @include transform(translateY(-50%));
+}
 
 .row {
   margin-top: 100px;
@@ -69,7 +74,11 @@
   margin-left: 5px;
 }
 
-.setting, .volume {
+.volume {
+  margin-left: 7px;
+}
+
+.setting {
   margin-left: 10px;
 }
 
@@ -102,7 +111,7 @@
 // progress bar
 
 .progressBar-wrapper {
-  width: 70%;
+  width: 60%;
 }
 
 #progressBar {
@@ -123,6 +132,12 @@
   border: 0px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+}
+
+.video-timer {
+  margin-top: 5px;
+  margin-left: 10px;
+
 }
 
 
@@ -257,8 +272,8 @@
   margin-top: 8%;
   .mid-play-button {
     clear: both;
-    width: 100px;
-    height: 62px;
+    width: 16%;
+    height: 15%;
     position: relative;
     left: 41%;
     background-color: rgba(80,79,81,1);
@@ -266,7 +281,8 @@
     top: 38%;
     i {
       font-size: 30px;
-      margin-top: 8px;
+      // margin-top: 8px;
+      @include vertical-align;
     }
   }
 }
@@ -285,7 +301,7 @@
 }
 
 :-webkit-full-screen .progressBar-wrapper {
-  width: 83%;
+  width: 75%;
 }
 
 :-webkit-full-screen .mid-play-button.btn {

@@ -5,6 +5,12 @@ Template.videoItem.rendered = function(){
   var MIN_TIME_LAPSE = 2;
   var REFRESH_VIDEO_PROGRESS = 1000;
 
+  timeToString = function(totalSeconds) {
+    minutes = Math.floor(totalSeconds / 60);
+    seconds = Math.floor(totalSeconds % 60);
+    return minutes + ":" + seconds;
+  };
+
   onYouTubeIframeAPIReady = function () {
 
     player = new YT.Player("player", {
@@ -48,9 +54,7 @@ Template.videoItem.rendered = function(){
             if (commentsInInterval.length > 0 && videoCurrentTime - videoOldTime <= MIN_TIME_LAPSE) {
               commentsInInterval.forEach(function(commentObj) {
                 totalSeconds = videoCurrentTime;
-                minutes = Math.floor(totalSeconds / 60);
-                seconds = Math.floor(totalSeconds % 60);
-                $('<div class="comment-line"></div>').text(commentObj.author + " : " + commentObj.text + "@ " + minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+                $('<div class="comment-line"></div>').text(commentObj.author + " : " + commentObj.text + "@ " + timeToString(totalSeconds)).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
               });
 
             }
@@ -63,6 +67,7 @@ Template.videoItem.rendered = function(){
             var videoCurrentTime = player.getCurrentTime();
             var videoDuration = player.getDuration();
             var videoProgress = videoCurrentTime / videoDuration;
+            $("#player-currentplaytime").html(timeToString(videoCurrentTime));
             updatePlayTime(videoProgress);
           }
         }, REFRESH_VIDEO_PROGRESS);
@@ -83,6 +88,35 @@ Template.videoItem.rendered = function(){
           },
           function() {
         });
+
+        $("#progressBar").hover(
+          function() {
+            console.log("Mouse in: progress bar");
+            $("#progressBar").mousemove(function(e){
+              var parentOffset = $(this).parent().offset();
+              var clickX = e.pageX - parentOffset.left;
+              var parentWidth = $(this).parent().width();
+              var videoDuration = player.getDuration();
+              var newProgress = clickX / parentWidth;
+              var newPlayPosition = newProgress * videoDuration;
+              console.log(timeToString(newPlayPosition));
+              minutes = Math.floor(newPlayPosition / 60);
+              seconds = Math.floor(newPlayPosition % 60);
+              $("#progressBar").attr('title',minutes + ":" + seconds);
+              $(document).tooltip({
+                // content: minutes + ":" + seconds,
+                track:true,
+                position: { my: "left+15 center", at: "right center" }
+              });
+            });
+          },
+          function() {
+            console.log("Mouse out: progress bar");
+        });
+
+        $("#player-videoduration").html(timeToString(player.getDuration()));
+
+        $("#player-currentplaytime").html("0:00");
 
         },
         onStateChange: function (event) {
@@ -130,18 +164,14 @@ Template.videoItem.rendered = function(){
       $("#commentBar").empty();
       var commentsArray = Comments.find({}, {sort: {currentTime: 1}}).fetch();
       var commentsCount = commentsArray.length;
-      // console.log("commentsCount: "+ commentsCount);
       var commentBarWidth = $("#commentBar").width();
-      // comment notches are 1px each
       var spacingWidth = commentBarWidth - commentsCount;
       var videoDuration = player.getDuration();
       var pixelPerSecond = spacingWidth / videoDuration;
       var timeOld = 0;
-      // console.log("commentBarWidth: "+commentBarWidth, "videoDuration: "+videoDuration);
       commentsArray.forEach(function (comment) {
         var timeNew = comment.currentTime;
         var spacing = (timeNew - timeOld) * pixelPerSecond;
-        // console.log(comment.text, comment.currentTime, "spacing: " + spacing);
         $("#commentBar").append('<div class="spacing" id='+comment._id+' style=width:'+spacing+'px></div>');
         $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+' style=width:'+1+'px></div>');
         timeOld = timeNew;
@@ -180,8 +210,6 @@ Template.videoItem.rendered = function(){
         player.playVideo();
         var commentText = $("#comments").val();
         totalSeconds = player.getCurrentTime();
-        minutes = Math.floor(totalSeconds / 60);
-        seconds = Math.floor(totalSeconds % 60);
         var comment = {
           text: commentText,
           currentTime: Math.floor(totalSeconds)
@@ -190,24 +218,33 @@ Template.videoItem.rendered = function(){
           if (error)
             return alert(error.reason);
         });
-        $('<div class="comment-line"></div>').text(Meteor.user().username + " : " + commentText + "@ " + minutes + ":" + seconds).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+        $('<div class="comment-line"></div>').text(Meteor.user().username + " : " + commentText + "@ " + timeToString(totalSeconds)).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
         fillCommentBar();
       }
     }, false);
 
     var videoElement = document.getElementById("myvideo");
     function toggleFullScreen() {
-      if (!document.mozFullScreen && !document.webkitFullScreen) {
-        if (videoElement.mozRequestFullScreen) {
+      if (!document.fullscreenElement &&
+          !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
+        if (document.documentElement.requestFullscreen) {
+          videoElement.requestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) {
+          videoElement.msRequestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
           videoElement.mozRequestFullScreen();
-        } else {
-          videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          videoElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
         }
       } else {
-        if (document.mozCancelFullScreen) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
           document.mozCancelFullScreen();
-        } else {
-          document.webkitCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
         }
       }
     }
