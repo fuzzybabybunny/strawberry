@@ -140,6 +140,10 @@
 
 }
 
+.ui-tooltip-content {
+  font-size: 15px;
+  color: gainsboro;
+}
 
 /*===============================================*/
 /*            SOCIAL CONTROLLER                  */
@@ -281,7 +285,6 @@
     top: 38%;
     i {
       font-size: 30px;
-      // margin-top: 8px;
       @include vertical-align;
     }
   }

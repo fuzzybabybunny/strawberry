@@ -102,12 +102,12 @@ Template.videoItem.rendered = function(){
               console.log(timeToString(newPlayPosition));
               minutes = Math.floor(newPlayPosition / 60);
               seconds = Math.floor(newPlayPosition % 60);
-              $("#progressBar").attr('title',minutes + ":" + seconds);
-              $(document).tooltip({
-                // content: minutes + ":" + seconds,
-                track:true,
-                position: { my: "left+15 center", at: "right center" }
-              });
+              $("#progressBar").tooltip({
+                items: "div",
+                content: minutes + ":" + seconds,
+                position: { my: "center bottom-10", at: "center top" },
+                track: true
+              }).tooltip("open");
             });
           },
           function() {
