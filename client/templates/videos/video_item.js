@@ -81,11 +81,8 @@ Template.videoItem.rendered = function(){
             var id = $(this).attr('id');
             var commentObj = Comments.findOne({_id:id});
             $('<div class="comment"></div>').text(commentObj.author + " : " + commentObj.text).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
-            // add time back
-            console.log("mouse in "+id);
           },
           function() {
-            console.log("mouse out");
         });
 
         },
@@ -99,8 +96,6 @@ Template.videoItem.rendered = function(){
         }
       }
     });
-
-
 
     $("#progressBar").progressbar({
       value: 0
@@ -122,10 +117,23 @@ Template.videoItem.rendered = function(){
     });
 
     function fillCommentBar() {
-      var videoData = Comments.find().fetch();
-      videoData.forEach(function (comment) {
-        console.log(comment.text, comment.currentTime);
-        $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+'></div>');
+      var commentsArray = Comments.find({}, {sort: {currentTime: 1}}).fetch();
+      var commentsCount = commentsArray.length;
+      // console.log("commentsCount: "+ commentsCount);
+      var commentBarWidth = $("#commentBar").width();
+      // comment notches are 1px each
+      var spacingWidth = commentBarWidth - commentsCount;
+      var videoDuration = player.getDuration();
+      var pixelPerSecond = spacingWidth / videoDuration;
+      var timeOld = 0;
+      // console.log("commentBarWidth: "+commentBarWidth, "videoDuration: "+videoDuration);
+      commentsArray.forEach(function (comment) {
+        var timeNew = comment.currentTime;
+        var spacing = (timeNew - timeOld) * pixelPerSecond;
+        // console.log(comment.text, comment.currentTime, "spacing: " + spacing);
+        $("#commentBar").append('<div class="spacing" id='+comment._id+' style=width:'+spacing+'px></div>');
+        $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+' style=width:'+1+'px></div>');
+        timeOld = timeNew;
       });
     }
 
