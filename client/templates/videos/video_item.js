@@ -76,6 +76,18 @@ Template.videoItem.rendered = function(){
 
         fillCommentBar();
 
+        $(".commentBarNotch").hover(
+          function() {
+            var id = $(this).attr('id');
+            var commentObj = Comments.findOne({_id:id});
+            $('<div class="comment"></div>').text(commentObj.author + " : " + commentObj.text).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+            // add time back
+            console.log("mouse in "+id);
+          },
+          function() {
+            console.log("mouse out");
+        });
+
         },
         onStateChange: function (event) {
           if (player.getPlayerState() === YT.PlayerState.PLAYING) {
@@ -108,15 +120,6 @@ Template.videoItem.rendered = function(){
       updatePlayTime(newProgress);
       player.seekTo(newPlayPosition);
     });
-
-    $(".commentBarNotch").hover(
-      function() {
-        var id = $(".commentBarNotch").attr('id');
-        console.log("mouse in "+id);
-      },
-      function() {
-        console.log("mouse out");
-      });
 
     function fillCommentBar() {
       var videoData = Comments.find().fetch();
