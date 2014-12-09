@@ -43,14 +43,6 @@
   }
 }
 
-#comments {
-  display: none;
-  color: black;
-}
-
-.comment-summary {
-  margin-top: 310px;
-}
 
 /*===============================================*/
 /*            PLAYER CONTROLLER                  */
@@ -140,17 +132,26 @@
 
 #social-controller {
   float: right;
+  margin-right: 8px;
 }
 
 #social-controller button {
-  height: 50px;
-  width: 50px;
-  margin-right: 10px;
-  margin-top: 8px;
+  margin-top: 9px;
+  height: 30px;
+  width: 40px;
+  margin-right: 4px;
+  margin-left: 2px;
+  border-radius: 5px;
+  background-color: rgba(80,79,81,1.0);
   i {
-    margin-left: -3px;
+    margin-left: -4px;
     margin-top: 2px;
+    font-size: 20px;
   }
+}
+
+#social-controller button:hover i {
+  color: rgba(69, 136, 250, 1.0);
 }
 
 #comment-textarea {
@@ -163,11 +164,16 @@
   }
 }
 
+#comments {
+  display: none;
+  color: black;
+}
+
 #vote-icons {
   width: 56px;
   float: right;
-  margin-right: -122px;
-  margin-top: 58px;
+  margin-right: -130px;
+  margin-top: 45px;
   display: none;
   .vote-icon {
     width: 45px;
@@ -198,23 +204,46 @@
   width: 70%;
 }
 
+.commentBar-wrapper {
+  padding: 8px;
+  background-color: rgba(80,79,81, 1);
+  border-radius: 5px;
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
 #commentBar {
+  overflow: hidden;
   width: 100%;
-  height: 30px;
-  background: blue;
-  padding: 0px;
+  height: 15px;
+  border-radius: 5px;
+  background: rgba(59, 58, 59, 1.0);
 }
 
 .commentBarNotch {
-  height: 30px;
+  height: 15px;
   background: red;
   display: inline-block;
+  position: relative;
 }
 
 .spacing {
   display: inline-block;
 }
 
+.comment-box {
+  margin-left: 8px;
+  padding: 0px;
+  .comment-line {
+    width: 100%;
+    background-color: rgba(80,79,81,0.7);
+    font-size: 16px;
+    margin-top: -5px;
+    padding-top: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+}
 
 /*===============================================*/
 /*                 FULL SCREEN                   */
@@ -238,3 +267,12 @@
   width: 83%;
 }
 
+
+/*===================================================*/
+/*                 COMMENT SUMMARY                   */
+/*===================================================*/
+
+
+.comment-summary {
+  margin-top: 310px;
+}

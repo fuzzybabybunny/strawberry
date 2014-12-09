@@ -51,7 +51,7 @@ Template.videoItem.rendered = function(){
                 totalSeconds = videoCurrentTime;
                 minutes = Math.floor(totalSeconds / 60);
                 seconds = Math.floor(totalSeconds % 60);
-                $('<div class="comment"></div>').text(commentObj.author + " : " + commentObj.text + "@ " + minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+                $('<div class="comment-line"></div>').text(commentObj.author + " : " + commentObj.text + "@ " + minutes + ":" + seconds ).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
               });
 
             }
@@ -80,7 +80,7 @@ Template.videoItem.rendered = function(){
           function() {
             var id = $(this).attr('id');
             var commentObj = Comments.findOne({_id:id});
-            $('<div class="comment"></div>').text(commentObj.author + " : " + commentObj.text).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+            $('<div class="comment-line"></div>').text(commentObj.author + " : " + commentObj.text).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
           },
           function() {
         });
@@ -190,7 +190,7 @@ Template.videoItem.rendered = function(){
           if (error)
             return alert(error.reason);
         });
-        $('<div class="comment"></div>').text(Meteor.user().username + " : " + commentText + "@ " + minutes + ":" + seconds).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+        $('<div class="comment-line"></div>').text(Meteor.user().username + " : " + commentText + "@ " + minutes + ":" + seconds).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
         fillCommentBar();
       }
     }, false);
