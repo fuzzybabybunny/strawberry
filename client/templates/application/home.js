@@ -1,8 +1,12 @@
 Template.home.rendered = function() {
   // Meteor.call('fetch');
 
-  Meteor.call("checkTwitter", function(error, results) {
-    console.log(results.content); //results.data should be a JSON object
+  // Meteor.call("checkTwitter", function(error, results) {
+  //   console.log(results.content); //results.data should be a JSON object
+  // });
+
+  Meteor.call("ajax_fetch", function(error, results) {
+    console.log("home:"+results); //results.data should be a JSON object
   });
 
   // var url = "http://gdata.youtube.com/feeds/api/standardfeeds/most_viewed?alt=json";
