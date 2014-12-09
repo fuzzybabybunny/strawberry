@@ -191,18 +191,19 @@ Template.videoItem.rendered = function(){
       }
     }
 
-    $(".vote").hover(
-      function() {
-        $("#vote-icons").slideDown('400');
-      }, function() {
-        $("#vote-icons").slideUp('400');
-      });
+    $(".vote").mouseover(function() {
+      if (!($(".vote-msg").hasClass('done'))) {
+        $(".vote-msg").show().animate({
+          marginTop: "-=150px"
+        }, 1000).fadeOut().addClass('done');
+      }
+    });
 
-    $("#vote-icons").hover(
+    $(".vote").click(
       function() {
-        $("#vote-icons").slideDown('400');
-      }, function() {
-        $("#vote-icons").slideUp('400');
+        if (!($("#comments").is(":visible"))) {
+          $("#vote-icons").slideToggle('400');
+        }
       });
 
   };
