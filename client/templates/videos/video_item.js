@@ -42,7 +42,6 @@ Template.videoItem.rendered = function(){
 
         Meteor.setInterval(function () {
           if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-
             var videoCurrentTime = player.getCurrentTime();
             var commentsInInterval = videoData.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
 
@@ -155,6 +154,7 @@ Template.videoItem.rendered = function(){
       }
       else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
         player.playVideo();
+        $(".mid-play-button").fadeOut('slow');
       }
     });
 
@@ -222,10 +222,25 @@ Template.videoItem.rendered = function(){
 
     $(".vote").click(
       function() {
-        if (!($("#comments").is(":visible"))) {
+        if (!($("#comments").is(":visible")) && !($(".vote-msg").is(':visible'))) {
           $("#vote-icons").slideToggle('400');
         }
       });
+
+    $(".mid-play-button").click(function () {
+      player.playVideo();
+      $(".mid-play-button").fadeOut('slow', function() {
+        $("#mid-overlays").click(function() {
+          if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+          }
+          else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
+            player.playVideo();
+          }
+        });
+      });
+
+    });
 
   };
 

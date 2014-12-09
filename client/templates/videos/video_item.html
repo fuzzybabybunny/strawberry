@@ -1,9 +1,6 @@
 <template name="videoItem">
 
-  <div class="well well-lg video-container">
-    <div id="video-title">
-      <h1>Video Title</h1>
-    </div>
+  <div class="video-container">
 
     <div id="myvideo">
       <div id="player"></div>
@@ -26,29 +23,33 @@
           <div class='vote-msg'>Click to vote!</div>
         </div>
         <!-- social controller dropdowns -->
-        <div id="comment-textarea">
-          <textarea type="text" id="comments" rows="5" placeholder="Speak your mind... Hit 'enter' to submit" ></textarea>
+        <div class="social-dropdowns">
+          <div id="comment-textarea">
+            <textarea type="text" id="comments" rows="5" placeholder="Speak your mind... Hit 'enter' to submit" ></textarea>
+          </div>
+
+          <div id="vote-icons">
+            <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="lmao"><img src="/images/lmao.png"></div></button>
+
+            <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="love"><img src="/images/love.png"></div></button>
+
+            <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="fku"><img src="/images/fku.png"></div></button>
+
+            <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="magic"><img src="/images/magic.png"></div></button>
+
+            <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="omfg"><img src="/images/omfg.png"></div></button>
+
+            <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="shite"><img src="/images/shite.png"></div></button>
+
+            <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="nsfw"><img src="/images/nsfw.png"></div></button>
+
+            <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="die"><img src="/images/die.png"></div></button>
+          </div>
         </div>
 
-        <div id="vote-icons">
-          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="lmao"><img src="/images/lmao.png"></div></button>
-
-          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="love"><img src="/images/love.png"></div></button>
-
-          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="fku"><img src="/images/fku.png"></div></button>
-
-          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="magic"><img src="/images/magic.png"></div></button>
-
-          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="omfg"><img src="/images/omfg.png"></div></button>
-
-          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="shite"><img src="/images/shite.png"></div></button>
-
-          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="nsfw"><img src="/images/nsfw.png"></div></button>
-
-          <button class="btn btn-fab btn-warning btn-fab btn-raised vote-icon"><div class="die"><img src="/images/die.png"></div></button>
+        <div id="mid-overlays">
+          <div class="mid-play-button btn"><i class="fa fa-play"></i></div>
         </div>
-
-
 
         <div id="player-controller">
           <div class="play"><i class="fa fa-play"></i></div>
