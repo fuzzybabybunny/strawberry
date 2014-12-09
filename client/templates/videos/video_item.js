@@ -225,17 +225,26 @@ Template.videoItem.rendered = function(){
 
     var videoElement = document.getElementById("myvideo");
     function toggleFullScreen() {
-      if (!document.mozFullScreen && !document.webkitFullScreen) {
-        if (videoElement.mozRequestFullScreen) {
+      if (!document.fullscreenElement &&
+          !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
+        if (document.documentElement.requestFullscreen) {
+          videoElement.requestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) {
+          videoElement.msRequestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
           videoElement.mozRequestFullScreen();
-        } else {
-          videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          videoElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
         }
       } else {
-        if (document.mozCancelFullScreen) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
           document.mozCancelFullScreen();
-        } else {
-          document.webkitCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
         }
       }
     }
