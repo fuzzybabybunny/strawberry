@@ -206,7 +206,12 @@
 }
 
 .commentBarNotch {
-  width: 10px;
   height: 30px;
   background: red;
+  display: inline-block;
+}
+
+.spacing {
+  display: inline-block;
+  background: white;
 }
