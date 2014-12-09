@@ -42,7 +42,7 @@ Template.header.rendered = function(){
       if (NextScroll > CurrentScroll){
 
         //write the codes related to down-ward scrolling here
-        if (window.scrollY >= 300) {
+        if (window.scrollY >= 200) {
           $( "div.navbar.navbar-info.navbar-fixed-top" ).fadeOut(600);
         }
 

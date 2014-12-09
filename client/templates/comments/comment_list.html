@@ -1,4 +1,20 @@
 <template name="commentList">
+<div class="well well-lg video-info-container">
+  <div class="title">
+    <h1>Title of the video goes here</h1>
+    <div class="video-info">
+      <p class="publisher">Publisher Name</p>
+      <p class="popularity">1,000,000 views</p>
+    </div>
+  </div>
+  <hr class="line-break">
+  <div class="social-actions">
+    <button class="vote btn btn-default"><i class="md md-mood"></i> Vote</button>
+    <button class="share btn btn-default"><i class="md md-share"></i> Share</button>
+    <button class="bookmark btn btn-default"><i class="md md-bookmark-outline"></i> Bookmark</button>
+  </div>
+</div>
+
 <div class="well well-lg comment-summary-container">
   <div class="comment-summary">
       {{#each comments}}

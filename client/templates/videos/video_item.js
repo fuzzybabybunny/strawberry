@@ -63,7 +63,7 @@ Template.videoItem.rendered = function(){
         }, DISPLAY_COMMENT_INTERVAL);
 
         Meteor.setInterval(function () {
-          if(player.getPlayerState() === YT.PlayerState.PLAYING) {
+          if ((player.getPlayerState() === YT.PlayerState.PLAYING) || (player.getPlayerState() === YT.PlayerState.PAUSED)) {
             var videoCurrentTime = player.getCurrentTime();
             var videoDuration = player.getDuration();
             var videoProgress = videoCurrentTime / videoDuration;
@@ -89,6 +89,7 @@ Template.videoItem.rendered = function(){
           function() {
         });
 
+
         $("#progressBar").hover(
           function() {
             console.log("Mouse in: progress bar");
@@ -103,7 +104,7 @@ Template.videoItem.rendered = function(){
               minutes = Math.floor(newPlayPosition / 60);
               seconds = Math.floor(newPlayPosition % 60);
               $("#progressBar").tooltip({
-                items: "div",
+                items: "#progressBar",
                 content: minutes + ":" + seconds,
                 position: { my: "center bottom-10", at: "center top" },
                 track: true
@@ -147,6 +148,16 @@ Template.videoItem.rendered = function(){
       var newPlayPosition = newProgress * videoDuration;
       updatePlayTime(newProgress);
       player.seekTo(newPlayPosition);
+      $(".mid-play-button").fadeOut('slow', function() {
+        $("#mid-overlays").click(function() {
+          if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+          }
+          else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
+            player.playVideo();
+          }
+        });
+      });
     });
 
     $("#commentBar").click(function(e) {
@@ -184,7 +195,16 @@ Template.videoItem.rendered = function(){
       }
       else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
         player.playVideo();
-        $(".mid-play-button").fadeOut('slow');
+        $(".mid-play-button").fadeOut('slow', function() {
+          $("#mid-overlays").click(function() {
+            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+              player.pauseVideo();
+            }
+            else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
+              player.playVideo();
+            }
+          });
+        });
       }
     });
 
