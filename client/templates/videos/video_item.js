@@ -116,6 +116,17 @@ Template.videoItem.rendered = function(){
       player.seekTo(newPlayPosition);
     });
 
+    $("#commentBar").click(function(e) {
+      var parentOffset = $(this).parent().offset();
+      var clickX = e.pageX - parentOffset.left;
+      var parentWidth = $(this).parent().width();
+      var videoDuration = player.getDuration();
+      var newProgress = clickX / parentWidth;
+      var newPlayPosition = newProgress * videoDuration;
+      updatePlayTime(newProgress);
+      player.seekTo(newPlayPosition);
+    });
+
     function fillCommentBar() {
       var commentsArray = Comments.find({}, {sort: {currentTime: 1}}).fetch();
       var commentsCount = commentsArray.length;
