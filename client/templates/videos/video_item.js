@@ -128,6 +128,7 @@ Template.videoItem.rendered = function(){
     });
 
     function fillCommentBar() {
+      $("#commentBar").empty();
       var commentsArray = Comments.find({}, {sort: {currentTime: 1}}).fetch();
       var commentsCount = commentsArray.length;
       // console.log("commentsCount: "+ commentsCount);
@@ -190,6 +191,7 @@ Template.videoItem.rendered = function(){
             return alert(error.reason);
         });
         $('<div class="comment"></div>').text(Meteor.user().username + " : " + commentText + "@ " + minutes + ":" + seconds).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+        fillCommentBar();
       }
     }, false);
 
