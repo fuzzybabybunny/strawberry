@@ -195,7 +195,7 @@
 /*===============================================*/
 #comment-display {
   float: left;
-  width: 50%;
+  width: 70%;
 }
 
 #commentBar {
@@ -208,6 +208,7 @@
 .commentBarNotch {
   height: 30px;
   background: red;
+  display: inline-block;
 }
 
 .spacing {
