@@ -1,0 +1,38 @@
+/*===================================================*/
+/*                 COMMENT SUMMARY                   */
+/*===================================================*/
+
+.video-info-container {
+  margin-top: 20px;
+}
+
+.title {
+  h1 {
+    margin-top: 0px;
+  }
+  .video-info {
+    .publisher {
+      font-weight: bold !important;
+      float: left;
+    }
+    .popularity {
+      float: right;
+    }
+
+  }
+}
+
+.line-break {
+  clear: both;
+  border-top: 1px solid #B2B2B2;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.social-actions {
+  button {
+    margin-left: 0px;
+  }
+}
+
+

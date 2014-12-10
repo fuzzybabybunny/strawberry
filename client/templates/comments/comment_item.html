@@ -1,3 +1,31 @@
 <template name="commentItem">
-  <div>{{text}} @ {{currentTime}}</div>
+
+  <div class="avatar-container">
+    <img src="http://image.spreadshirt.com/image-server/v1/compositions/18058034/views/1,width=280,height=280,appearanceId=2.png/basic-cute-strawberry-t-shirt_design.png" class="user-avatar-anon">
+  </div>
+  <div class="comment-container">
+    <div class="comment-details">
+      <span class="author">{{author}}</span>
+      <span class="current-time">@{{> minSec}}</span>
+      <span class="space"> &nbsp;&middot;&nbsp; </span>
+      <span class="created-at">{{> ago}}</span>
+    </div>
+    <div class="comment-text">{{text}}</div>
+    <div class="comment-actions">
+      <span class="reply">Reply</span>
+      <span class="space"> &nbsp;|&nbsp; </span>
+      <span class="like"><i class="md md-thumb-up"></i></span>
+      <span class="dislike"><i class="md md-thumb-down"></i></span>
+    </div>
+  </div>
+
+</template>
+
+<!-- template for converting seconds into minute:second. see comment_item.js -->
+<template name="minSec">
+  {{timeToString currentTime}}
+</template>
+
+<template name="ago">
+  {{dateRange createdAt}}
 </template>

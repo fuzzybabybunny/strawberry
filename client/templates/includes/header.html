@@ -10,7 +10,7 @@
           </button>
 
 
-          <a href="javascript:void(0)" class="navbar-brand header-brand">
+          <a href="/" class="navbar-brand header-brand">
             <div class="header-logo"><img src="/images/strawberry.png" alt="Brand"></div>
             <div class="header-logo-text"><p>潮媒</p></div>
           </a>
@@ -21,28 +21,29 @@
         <div class="navbar-collapse collapse navbar-primary-collapse">
           <ul class="nav navbar-nav header-tags">
             <li class="header-tags-container">
-              <a href="javascript:void(0)" class="tags"><button class="btn btn-fab btn-warning btn-fab btn-raised" data-toggle="tooltip" data-placement="bottom" title="LMAO!"><div class="icon-labels font-lol LMAO">¥</div></button></a>
+              <a href="javascript:void(0)" class="tags" alt="LMAO!"><button class="btn btn-fab btn-warning btn-fab btn-raised"><div class="icon-labels lmao"><img src="/images/lmao.png"></div></button></a>
 
-              <a href="javascript:void(0)" class="tags"><button class="btn btn-fab btn-warning btn-fab btn-raised" data-toggle="tooltip" data-placement="bottom" title="LOVE!"><div class="icon-labels font heart">C</div></button></a>
+              <a href="javascript:void(0)" class="tags" alt="LOVE!"><button class="btn btn-fab btn-warning btn-fab btn-raised"><div class="icon-labels love"><img src="/images/love.png"></div></button></a>
 
-              <a href="javascript:void(0)" class="tags"><button class="btn btn-fab btn-warning btn-fab btn-raised" data-toggle="tooltip" data-placement="bottom" title="F**K U!"><div class="icon-labels font middle-finger">M</div></button></a>
+              <a href="javascript:void(0)" class="tags" alt="F**K U!"><button class="btn btn-fab btn-warning btn-fab btn-raised"><div class="icon-labels fku"><img src="/images/fku.png"></div></button></a>
 
-              <a href="javascript:void(0)" class="tags"><button class="btn btn-fab btn-warning btn-fab btn-raised" data-toggle="tooltip" data-placement="bottom" title="MAGIC!"><div class="icon-labels font star">W</div></button></a>
+              <a href="javascript:void(0)" class="tags" alt="MAGIC!"><button class="btn btn-fab btn-warning btn-fab btn-raised"><div class="icon-labels magic"><img src="/images/magic.png"></div></button></a>
 
-              <a href="javascript:void(0)" class="tags"><button class="btn btn-fab btn-warning btn-fab btn-raised" data-toggle="tooltip" data-placement="bottom" title="OMFG!"><div class="icon-labels font-lol omg">OMFG</div></button></a>
+              <a href="javascript:void(0)" class="tags" alt="OMFG!"><button class="btn btn-fab btn-warning btn-fab btn-raised"><div class="icon-labels omfg"><img src="/images/omfg.png"></div></button></a>
 
-              <a href="javascript:void(0)" class="tags"><button class="btn btn-fab btn-warning btn-fab btn-raised" data-toggle="tooltip" data-placement="bottom" title="SHITE!"><div class="icon-labels font crap">O</div></button></a>
+              <a href="javascript:void(0)" class="tags" alt="SHITE!"><button class="btn btn-fab btn-warning btn-fab btn-raised"><div class="icon-labels shite"><img src="/images/shite.png"></div></button></a>
 
-              <a href="javascript:void(0)" class="tags"><button class="btn btn-fab btn-warning btn-fab btn-raised" data-toggle="tooltip" data-placement="bottom" title="NSFW!"><div class="icon-labels font-lol nsfw">NSFW</div></button></a>
+              <a href="javascript:void(0)" class="tags" alt="NSFW!"><button class="btn btn-fab btn-warning btn-fab btn-raised"><div class="icon-labels nsfw"><img src="/images/nsfw.png"></div></button></a>
 
-              <a href="javascript:void(0)" class="tags"><button class="btn btn-fab btn-warning btn-fab btn-raised" data-toggle="tooltip" data-placement="bottom" title="DIE!"><div class="icon-labels font die">R</div></button></a>
+              <a href="javascript:void(0)" class="tags" alt="DIE!"><button class="btn btn-fab btn-warning btn-fab btn-raised"><div class="icon-labels die"><img src="/images/die.png"></div></button></a>
+
             </li>
 
           </ul>
 
           <ul class="nav navbar-nav navbar-right header-search">
             <li class="header-search-container">
-              <button class="btn btn-fab btn-primary search-button" data-toggle="tooltip" data-placement="bottom" title="Search"><i class="md md-search"></i></button>
+              <button class="btn btn-fab btn-primary search-button"><i class="md md-search"></i></button>
               <form class="navbar-form navbar-right search-field hidden">
                 <div class="form-control-wrapper">
                   <input type="text" class="form-control col-lg-8 empty" placeholder="Search"><span class="material-input"></span>
@@ -50,11 +51,12 @@
               </form>
             </li>
 
+
             <li class="dropdown header-login">
-              <button class="btn btn-fab btn-primary login-button dropdown-toggle" data-toggle="tooltip" data-placement="bottom" title="Signup or Login"><i class="fa fa-user fa-fw dropdown-toggle" data-toggle="dropdown"></i>
+              <button class="btn btn-fab btn-primary login-button dropdown-toggle"><i class="fa fa-user fa-fw dropdown-toggle" data-toggle="dropdown"></i>
               </button>
-                <!-- <div class="ripple-wrapper"></div> -->
-              <ul class="dropdown-menu">
+
+<!--               <ul class="dropdown-menu">
                 <li><a href="javascript:void(0)">Action</a></li>
                 <li><a href="javascript:void(0)">Another action</a></li>
                 <li><a href="javascript:void(0)">Something else here</a></li>
@@ -62,7 +64,12 @@
                 <li class="dropdown-header">Dropdown header</li>
                 <li><a href="javascript:void(0)">Separated link</a></li>
                 <li><a href="javascript:void(0)">One more separated link</a></li>
-              </ul>
+              </ul> -->
+            </li>
+            <li class="header-login">
+              <div class="login-button">
+                {{> loginButtons}}
+              </div>
             </li>
 
           </ul>

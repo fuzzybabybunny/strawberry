@@ -1,11 +1,10 @@
-<head>
-  <title>潮媒</title>
-</head>
-
-<body>
-
-  {{> header}}
-
-  {{> videoItem}}
-
-</body>
+<template name="layout">
+  <body>
+    {{> header}}
+    <div class="container">
+      <div class="row">
+        {{> yield}}
+      </div>
+    </div>
+  </body>
+</template>

@@ -1,0 +1,316 @@
+@import ".meteor/local/build/programs/server/assets/packages/wolves_bourbon/bourbon";
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  @include transform(translateY(-50%));
+}
+
+.row {
+  margin-top: 100px;
+}
+
+.video-container {
+  margin-top: 10px;
+  height: 540px;
+  #video-title {
+    h1 {
+      margin-top: 0px;
+    }
+  }
+}
+
+#myvideo {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  position: relative;
+  height: 100%;
+  #player {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+  }
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  margin-top: -545px;
+  position: relative;
+  z-index: 1000;
+  .comment-box {
+    position: relative;
+    font-size: 20px;
+    height: 50px;
+  }
+}
+
+
+/*===============================================*/
+/*            PLAYER CONTROLLER                  */
+/*===============================================*/
+
+#player-controller {
+  clear: both;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  background: black;
+  padding-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#player-controller div {
+  float: left;
+}
+
+.play, .setting, .fullscreen, .volume {
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.volume {
+  margin-left: 7px;
+}
+
+.setting {
+  margin-left: 10px;
+}
+
+// Volume Slide
+
+#volumeSlider {
+  width: 100px;
+  margin-top: 8px;
+  margin-left: 5px;
+}
+
+.ui-slider.ui-slider-horizontal.ui-widget.ui-widget-content.ui-corner-all {
+  height: 15px;
+  border-radius: 20px;
+  border: 0px;
+}
+
+.ui-slider-range.ui-widget-header.ui-corner-all.ui-slider-range-min {
+  background: rgba(69, 136, 250, 1.0);
+}
+
+.ui-slider-handle.ui-state-default.ui-corner-all {
+  border-radius: 50px;
+  width: 16px;
+  height: 16px;
+  top: 0px;
+  border: 0px;
+}
+
+// progress bar
+
+.progressBar-wrapper {
+  width: 60%;
+}
+
+#progressBar {
+  width: 100%;
+  border-radius: 20px;
+  height: 15px;
+  border: 0px;
+  margin-top: 8px;
+  margin-left: 5px;
+}
+
+.ui-widget-content {
+  background: #333;
+}
+
+.ui-widget-header {
+  background: rgba(69, 136, 250, 1.0);
+  border: 0px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.video-timer {
+  margin-top: 5px;
+  margin-left: 10px;
+
+}
+
+.ui-tooltip-content {
+  font-size: 15px;
+  color: gainsboro;
+}
+
+/*===============================================*/
+/*            SOCIAL CONTROLLER                  */
+/*===============================================*/
+
+#social-controller {
+  float: right;
+  margin-right: 8px;
+}
+
+#social-controller button {
+  margin-top: 9px;
+  height: 30px;
+  width: 40px;
+  margin-right: 4px;
+  margin-left: 2px;
+  border-radius: 5px;
+  background-color: rgba(80,79,81,1.0);
+  i {
+    margin-left: -4px;
+    margin-top: 2px;
+    font-size: 20px;
+  }
+}
+
+#social-controller button:hover i {
+  color: rgba(69, 136, 250, 1.0);
+}
+
+#comment-textarea {
+  float: right;
+  textarea {
+    width: 190px;
+    border-radius: 5px;
+    border: 3px solid rgba(69, 136, 250, 1.0);
+    margin-top: -8px;
+    margin-right: 10px;
+  }
+}
+
+#comments {
+  display: none;
+  color: black;
+}
+
+#vote-icons {
+  width: 56px;
+  float: right;
+  margin-right: -105px;
+  margin-top: 45px;
+  display: none;
+  .vote-icon {
+    width: 45px;
+    height: 45px;
+    margin-top: 5px;
+    img {
+      width: 30px;
+    }
+  }
+}
+
+.vote-msg {
+  width: 57px;
+  margin-left: 45px;
+  font-size: 10px;
+  margin-top: -30px;
+  z-index: 300;
+  position: relative;
+  background: black;
+  display: none;
+}
+
+/*===============================================*/
+/*            COMMENT BAR  CSS                   */
+/*===============================================*/
+#comment-display {
+  float: left;
+  width: 70%;
+}
+
+.commentBar-wrapper {
+  padding: 8px;
+  background-color: rgba(80,79,81, 1);
+  border-radius: 5px;
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+#commentBar {
+  overflow: hidden;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: rgba(59, 58, 59, 1.0);
+}
+
+.commentBarNotch {
+  height: 15px;
+  background: red;
+  display: inline-block;
+  position: relative;
+}
+
+.spacing {
+  display: inline-block;
+}
+
+.comment-box {
+  margin-left: 8px;
+  padding: 0px;
+  .comment-line {
+    width: 100%;
+    background-color: rgba(80,79,81,0.7);
+    font-size: 16px;
+    margin-top: -5px;
+    padding-top: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+/*================================================*/
+/*                 MID OVERLAYS                   */
+/*================================================*/
+#mid-overlays {
+  clear: both;
+  height: 80%;
+  position: absolute;
+  width: 100%;
+  margin-top: 8%;
+  .mid-play-button {
+    clear: both;
+    width: 16%;
+    height: 15%;
+    position: relative;
+    left: 41%;
+    background-color: rgba(80,79,81,1);
+    border-radius: 15px;
+    top: 38%;
+    i {
+      font-size: 30px;
+      @include vertical-align;
+    }
+  }
+}
+
+
+/*===============================================*/
+/*                 FULL SCREEN                   */
+/*===============================================*/
+
+// :-webkit-full-screen {
+//   object-fit: contain;
+// }
+
+:-webkit-full-screen .overlay {
+  margin-top: -63%;
+}
+
+:-webkit-full-screen .progressBar-wrapper {
+  width: 75%;
+}
+
+:-webkit-full-screen .mid-play-button.btn {
+  left: 45%;
+}
+
+:fullscreen .progressBar-wrapper, :-webkit-full-screen .progressBar-wrapper, :-moz-full-screen .progressBar-wrapper {
+  width: 83%;
+}
