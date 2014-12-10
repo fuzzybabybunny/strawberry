@@ -1,15 +1,16 @@
-Template.videoItem.helpers({
-  url: function() {
-    return window.location.href;
-  }
-});
-
 Template.videoItem.rendered = function(){
 
   var DISPLAY_COMMENT_INTERVAL = 1000;
   var LOAD_COMMENT_INTERVAL = 10000;
   var MIN_TIME_LAPSE = 2;
   var REFRESH_VIDEO_PROGRESS = 1000;
+
+  // var url = window.location.href;
+  // var id = url.substring(url.lastIndexOf('/') + 1);
+  // console.log(id);
+  // // var vid = Videos.findOne(id).videoSourceId;
+  // var vid = $("#videoSourceId").html();
+  // console.log(vid);
 
   timeToString = function(totalSeconds) {
     minutes = Math.floor(totalSeconds / 60);
@@ -301,10 +302,10 @@ Template.videoItem.rendered = function(){
 
   YT.load();
 
-  FB.init({
-    appId      : '809309035792738',
-    status     : true,
-    xfbml      : true,
-    version    : 'v2.0'
-  });
+  // FB.init({
+  //   appId      : '809309035792738',
+  //   status     : true,
+  //   xfbml      : true,
+  //   version    : 'v2.0'
+  // });
 };

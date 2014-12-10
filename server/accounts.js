@@ -16,33 +16,33 @@ Meteor.startup(function() {
   });
 });
 
-Accounts.onCreateUser(function (options, user) {
-  if (options && options.profile) {
-          user.profile = options.profile;
-  }
+// Accounts.onCreateUser(function (options, user) {
+//   if (options && options.profile) {
+//           user.profile = options.profile;
+//   }
 
-  if (user.services) {
+//   if (user.services) {
 
-      var service = _.pairs(user.services)[0];
-      console.log(service);
-      var serviceName = service[0];
-      var serviceData = service[1];
+//       var service = _.pairs(user.services)[0];
+//       console.log(service);
+//       var serviceName = service[0];
+//       var serviceData = service[1];
 
-      console.log("serviceName", serviceName);
+//       console.log("serviceName", serviceName);
 
-      if (serviceName == "facebook") {
-          user.services.facebook.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
-          user.emails = [
-              {"address": serviceData.email, "verified": true}
-          ];
-          console.log(serviceData.id);
-          user.profile = {"first_name": serviceData.first_name, "last_name": serviceData.last_name, "avatar": user.services.facebook.picture};
-      }
+//       if (serviceName == "facebook") {
+//           user.services.facebook.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
+//           user.email = [
+//               {"address": serviceData.email, "verified": true}
+//           ];
+//           console.log(serviceData.id);
+//           user.profile = {"first_name": serviceData.first_name, "last_name": serviceData.last_name, "avatar": user.services.facebook.picture};
+//       }
 
-  }
-  console.log("user created :", user);
+//   }
+//   console.log("user created :", user);
 
-  return user;
+//   return user;
 
-  // return user;
-});
+//   // return user;
+// });
