@@ -20,9 +20,28 @@ if (Comments.find().count() === 0) {
     videoSourceId: "LdH1hSWGFGU",
     videoTitle: "Woman playing piano"
   });
-  var video = Meteor.users.findOne(videoId);
+  var video = Videos.findOne(videoId);
+
+  var video2Id = Videos.insert({
+    userId: mark._id,
+    author: mark.profile.name,
+    createdAt: new Date(),
+    videoSourceId: "VxvDVhjALoU",
+    videoTitle: "Funny Video 1"
+  });
+  var video = Videos.findOne(video2Id);
+
+  var video3Id = Videos.insert({
+    userId: mark._id,
+    author: mark.profile.name,
+    createdAt: new Date(),
+    videoSourceId: "8QOSztE",
+    videoTitle: "Funny Video 2"
+  });
+  var video = Videos.findOne(video3Id);
 
   Comments.insert({
+    videoId: video._id,
     userId: harry._id,
     author: harry.profile.name,
     createdAt: new Date(),
@@ -31,6 +50,7 @@ if (Comments.find().count() === 0) {
   });
 
   Comments.insert({
+    videoId: video._id,
     userId: harry._id,
     author: harry.profile.name,
     createdAt: new Date(),
@@ -39,6 +59,7 @@ if (Comments.find().count() === 0) {
   });
 
   Comments.insert({
+    videoId: video._id,
     userId: mark._id,
     author: mark.profile.name,
     createdAt: new Date(),
@@ -47,6 +68,7 @@ if (Comments.find().count() === 0) {
   });
 
   Comments.insert({
+    videoId: video._id,
     userId: mark._id,
     author: mark.profile.name,
     createdAt: new Date(),
@@ -55,6 +77,7 @@ if (Comments.find().count() === 0) {
   });
 
   Comments.insert({
+    videoId: video._id,
     userId: fer._id,
     author: fer.profile.name,
     createdAt: new Date(),
@@ -63,6 +86,7 @@ if (Comments.find().count() === 0) {
   });
 
   Comments.insert({
+    videoId: video._id,
     userId: fer._id,
     author: fer.profile.name,
     createdAt: new Date(),
