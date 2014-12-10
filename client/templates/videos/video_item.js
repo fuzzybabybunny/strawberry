@@ -128,17 +128,6 @@ Template.videoItem.rendered = function(){
             }
           }, LOAD_COMMENT_INTERVAL);
 
-
-          $(".commentBarNotch").hover(
-            function() {
-              console.log("comment bar mouseover!!!!!");
-              var id = $(this).attr('id');
-              var commentObj = Comments.findOne({_id:id});
-              $('<div class="comment-line"></div>').text(commentObj.author + " : " + commentObj.text).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
-            },
-            function() {
-          });
-
           $("#progressBar").hover(
             function() {
               $("#progressBar").mousemove(function(e){
@@ -161,6 +150,16 @@ Template.videoItem.rendered = function(){
 
           initializePlayer();
           fillCommentBar();
+
+          $(".commentBarNotch").hover(
+            function() {
+              console.log("comment bar mouseover!!!!!");
+              var id = $(this).attr('id');
+              var commentObj = Comments.findOne({_id:id});
+              $('<div class="comment-line"></div>').text(commentObj.author + " : " + commentObj.text).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+            },
+            function() {
+          });
 
         },
         onStateChange: function (event) {
