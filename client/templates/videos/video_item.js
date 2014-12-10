@@ -39,6 +39,24 @@ Template.videoItem.rendered = function(){
     }
   };
 
+  function fillCommentBar() {
+    $("#commentBar").empty();
+    var commentsArray = Comments.find({}, {sort: {currentTime: 1}}).fetch();
+    var commentsCount = commentsArray.length;
+    var commentBarWidth = $("#commentBar").width();
+    var spacingWidth = commentBarWidth - commentsCount;
+    var videoDuration = player.getDuration();
+    var pixelPerSecond = spacingWidth / videoDuration;
+    var timeOld = 0;
+    commentsArray.forEach(function (comment) {
+      var timeNew = comment.currentTime;
+      var spacing = (timeNew - timeOld) * pixelPerSecond;
+      $("#commentBar").append('<div class="spacing" id='+comment._id+' style=width:'+spacing+'px></div>');
+      $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+' style=width:'+1+'px></div>');
+      timeOld = timeNew;
+    });
+  }
+
   initializePlayer = function() {
     $("#progressBar").progressbar({ value: 0 });
     $("#player-videoduration").html(timeToString(player.getDuration()));
@@ -113,13 +131,13 @@ Template.videoItem.rendered = function(){
 
           $(".commentBarNotch").hover(
             function() {
+              console.log("comment bar mouseover!!!!!");
               var id = $(this).attr('id');
               var commentObj = Comments.findOne({_id:id});
               $('<div class="comment-line"></div>').text(commentObj.author + " : " + commentObj.text).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
             },
             function() {
           });
-
 
           $("#progressBar").hover(
             function() {
@@ -191,24 +209,6 @@ Template.videoItem.rendered = function(){
       updatePlayTime(newProgress);
       player.seekTo(newPlayPosition);
     });
-
-    function fillCommentBar() {
-      $("#commentBar").empty();
-      var commentsArray = Comments.find({}, {sort: {currentTime: 1}}).fetch();
-      var commentsCount = commentsArray.length;
-      var commentBarWidth = $("#commentBar").width();
-      var spacingWidth = commentBarWidth - commentsCount;
-      var videoDuration = player.getDuration();
-      var pixelPerSecond = spacingWidth / videoDuration;
-      var timeOld = 0;
-      commentsArray.forEach(function (comment) {
-        var timeNew = comment.currentTime;
-        var spacing = (timeNew - timeOld) * pixelPerSecond;
-        $("#commentBar").append('<div class="spacing" id='+comment._id+' style=width:'+spacing+'px></div>');
-        $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+' style=width:'+1+'px></div>');
-        timeOld = timeNew;
-      });
-    }
 
     $(".play").click(function() {
       if (player.getPlayerState() === YT.PlayerState.PLAYING) {
