@@ -3,3 +3,4 @@ Template.commentList.helpers({
     return Comments.find({}, {sort: {createdAt: -1}});
   }
 });
+

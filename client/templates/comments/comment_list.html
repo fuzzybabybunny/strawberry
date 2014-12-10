@@ -18,13 +18,11 @@
 <div class="well well-lg comment-summary-container">
   <h3 class="all-comments">ALL COMMENTS ({{comments.count}})</h3>
   <div class="comment-summary">
-      {{#each comments}}
-        <div class="comment-item-container">
-          <div class="user-avatar-anon"><img src="http://image.spreadshirt.com/image-server/v1/compositions/18058034/views/1,width=280,height=280,appearanceId=2.png/basic-cute-strawberry-t-shirt_design.png"></div>
-          <div class="comment-item">{{> commentItem}}</div>
-
-        </div>
-      {{/each}}
+    {{#each comments}}
+      <div class="comment-item-container">
+        {{> commentItem}}
+      </div>
+    {{/each}}
   </div>
 </div>
 </template>
