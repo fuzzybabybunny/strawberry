@@ -94,7 +94,6 @@ Template.videoItem.rendered = function(){
 
         $("#progressBar").hover(
           function() {
-            console.log("Mouse in: progress bar");
             $("#progressBar").mousemove(function(e){
               var parentOffset = $(this).parent().offset();
               var clickX = e.pageX - parentOffset.left;
@@ -102,19 +101,15 @@ Template.videoItem.rendered = function(){
               var videoDuration = player.getDuration();
               var newProgress = clickX / parentWidth;
               var newPlayPosition = newProgress * videoDuration;
-              console.log(timeToString(newPlayPosition));
-              minutes = Math.floor(newPlayPosition / 60);
-              seconds = Math.floor(newPlayPosition % 60);
               $("#progressBar").tooltip({
                 items: "#progressBar",
-                content: minutes + ":" + seconds,
+                content: timeToString(newPlayPosition),
                 position: { my: "center bottom-10", at: "center top" },
                 track: true
               }).tooltip("open");
             });
           },
           function() {
-            console.log("Mouse out: progress bar");
         });
 
         $("#player-videoduration").html(timeToString(player.getDuration()));
@@ -226,7 +221,6 @@ Template.videoItem.rendered = function(){
 
     var commentInput = document.getElementById("comments");
     commentInput.addEventListener("keydown", function(e) {
-      console.log("keydown");
       if (e.keyCode == 13) {
         $("#comments").slideUp();
         player.playVideo();
