@@ -23,7 +23,6 @@ if (Comments.find().count() === 0) {
   var video = Meteor.users.findOne(videoId);
 
   Comments.insert({
-    videoId: video._id,
     userId: harry._id,
     author: harry.profile.name,
     createdAt: new Date(),
@@ -32,7 +31,6 @@ if (Comments.find().count() === 0) {
   });
 
   Comments.insert({
-    videoId: video._id,
     userId: harry._id,
     author: harry.profile.name,
     createdAt: new Date(),
@@ -41,7 +39,6 @@ if (Comments.find().count() === 0) {
   });
 
   Comments.insert({
-    videoId: video._id,
     userId: mark._id,
     author: mark.profile.name,
     createdAt: new Date(),
@@ -50,7 +47,6 @@ if (Comments.find().count() === 0) {
   });
 
   Comments.insert({
-    videoId: video._id,
     userId: mark._id,
     author: mark.profile.name,
     createdAt: new Date(),
@@ -59,7 +55,6 @@ if (Comments.find().count() === 0) {
   });
 
   Comments.insert({
-    videoId: video._id,
     userId: fer._id,
     author: fer.profile.name,
     createdAt: new Date(),
@@ -68,7 +63,6 @@ if (Comments.find().count() === 0) {
   });
 
   Comments.insert({
-    videoId: video._id,
     userId: fer._id,
     author: fer.profile.name,
     createdAt: new Date(),
