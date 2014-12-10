@@ -65,13 +65,11 @@ Template.videoItem.rendered = function(){
         }, DISPLAY_COMMENT_INTERVAL);
 
         Meteor.setInterval(function () {
-          if ((player.getPlayerState() === YT.PlayerState.PLAYING) || (player.getPlayerState() === YT.PlayerState.PAUSED)) {
-            var videoCurrentTime = player.getCurrentTime();
-            var videoDuration = player.getDuration();
-            var videoProgress = videoCurrentTime / videoDuration;
-            $("#player-currentplaytime").html(timeToString(videoCurrentTime));
-            updatePlayTime(videoProgress);
-          }
+          var videoCurrentTime = player.getCurrentTime();
+          var videoDuration = player.getDuration();
+          var videoProgress = videoCurrentTime / videoDuration;
+          $("#player-currentplaytime").html(timeToString(videoCurrentTime));
+          updatePlayTime(videoProgress);
         }, REFRESH_VIDEO_PROGRESS);
 
         Meteor.setInterval(function () {
