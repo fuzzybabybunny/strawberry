@@ -1,3 +1,9 @@
+Template.videoItem.helpers({
+  url: function() {
+    return window.location.href;
+  }
+});
+
 Template.videoItem.rendered = function(){
 
   var DISPLAY_COMMENT_INTERVAL = 1000;
@@ -294,4 +300,11 @@ Template.videoItem.rendered = function(){
   };
 
   YT.load();
+
+  FB.init({
+    appId      : '809309035792738',
+    status     : true,
+    xfbml      : true,
+    version    : 'v2.0'
+  });
 };
