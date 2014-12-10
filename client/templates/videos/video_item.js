@@ -39,6 +39,12 @@ Template.videoItem.rendered = function(){
     }
   };
 
+  initializePlayer = function() {
+    $("#progressBar").progressbar({ value: 0 });
+    $("#player-videoduration").html(timeToString(player.getDuration()));
+    $("#player-currentplaytime").html("0:00");
+  };
+
   onYouTubeIframeAPIReady = function () {
 
     player = new YT.Player("player", {
@@ -104,7 +110,6 @@ Template.videoItem.rendered = function(){
             }
           }, LOAD_COMMENT_INTERVAL);
 
-          fillCommentBar();
 
           $(".commentBarNotch").hover(
             function() {
@@ -136,9 +141,8 @@ Template.videoItem.rendered = function(){
             function() {
           });
 
-          $("#player-videoduration").html(timeToString(player.getDuration()));
-
-          $("#player-currentplaytime").html("0:00");
+          initializePlayer();
+          fillCommentBar();
 
         },
         onStateChange: function (event) {
@@ -150,10 +154,6 @@ Template.videoItem.rendered = function(){
           }
         }
       }
-    });
-
-    $("#progressBar").progressbar({
-      value: 0
     });
 
     updatePlayTime = function(progress) {
