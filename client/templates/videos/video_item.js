@@ -153,7 +153,6 @@ Template.videoItem.rendered = function(){
 
           $(".commentBarNotch").hover(
             function() {
-              console.log("comment bar mouseover!!!!!");
               var id = $(this).attr('id');
               var commentObj = Comments.findOne({_id:id});
               $('<div class="comment-line"></div>').text(commentObj.author + " : " + commentObj.text).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
