@@ -277,8 +277,15 @@ Template.videoItem.rendered = function(){
 
     $(".vote").click(
       function() {
-        if (!($("#comments").is(":visible")) && !($(".vote-msg").is(':visible'))) {
+        if (!($("#comments").is(":visible")) && !($(".vote-msg").is(':visible')) && !($(".share-icons").is(':visible'))) {
           $("#vote-icons").slideToggle('400');
+        }
+      });
+
+    $(".share").click(
+      function() {
+        if (!($("#comments").is(":visible")) && !($(".vote-icons").is(':visible'))) {
+          $("#share-icons").slideToggle('400');
         }
       });
 
