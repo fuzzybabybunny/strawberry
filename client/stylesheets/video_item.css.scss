@@ -314,6 +314,8 @@
       font-size: 30px;
       @include vertical-align;
     }
+
+    @include transition(opacity 1.0s linear);
   }
 }
 
