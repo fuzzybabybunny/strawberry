@@ -1,5 +1,5 @@
 <template name="videoShow">
-  <div>createdAt{{ createdAt }} - author{{ author }} : videoTitle{{ videoTitle }} | videoSourceId{{ videoSourceId }}</div>
+  <div>{{ videoTitle }} BY {{ author }} CREATED AT {{ createdAt }} [YOUTUBE URL: {{ videoSourceId }}]</div>
   <div class="col-xs-8">
     {{> videoItem}}
     {{> commentList}}

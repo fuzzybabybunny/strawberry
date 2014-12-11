@@ -1,4 +1,3 @@
 <template name="videoListItem">
-  <div>{{ createdAt }} - {{ author }} : {{ videoTitle }} | {{ videoSourceId }}</div>
-  <div><a href="/videos/{{ _id }}">link</a></div>
+  <div><a href="/videos/{{ _id }}">{{ videoTitle }} BY {{ author }} CREATED AT {{ createdAt }} [YOUTUBE URL: {{ videoSourceId }}]</a></div>
 </template>
