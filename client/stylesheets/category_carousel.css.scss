@@ -1,7 +1,7 @@
 
 
 .carousel-item {
-  padding: 0px;
+  padding: 10px;
   .card {
     .card-height-indicator {
       margin-top: 90%;
@@ -27,3 +27,21 @@
     }
   }
 }
+
+
+#carousel-category-carousel .carousel-control {
+  height: 60px;
+  width: 5%;
+  top: 40%;
+  i {
+    font-size: 80px;
+  }
+}
+
+// #carousel-category-carousel .carousel-control .right {
+//   @include background-image(linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.8) 100%));
+// }
+
+// #carousel-category-carousel .carousel-control .left {
+//   @include background-image(linear-gradient(to right,rgba(0,0,0,.8) 0,rgba(0,0,0,.0001) 100%));
+// }
