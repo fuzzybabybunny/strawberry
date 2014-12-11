@@ -1,0 +1,3 @@
+Template.categoryCarousel.rendered = function () {
+
+};

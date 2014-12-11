@@ -44,7 +44,7 @@
   </div>
 
   <div class="jumbotron" id="jumbotron-featured-videos">
-    <div id="carousel-featured-videos" class="carousel slide" data-ride="carousel">
+    <div id="carousel-featured-videos" class="carousel slide jumbo" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li data-target="#carousel-featured-videos" data-slide-to="0" class="active"></li>
@@ -53,7 +53,7 @@
       </ol>
 
       <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
+      <div class="carousel-inner jumbo" role="listbox">
         <div class="item active">
           <img src="http://www.businessreviewusa.com/public/uploads/large/large_article_im4213_rebecca_black_v4.jpg" alt="">
           <div class="carousel-caption">
@@ -76,16 +76,19 @@
       </div>
 
       <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-featured-videos" role="button" data-slide="prev">
+      <a class="left carousel-control jumbo" href="#carousel-featured-videos" role="button" data-slide="prev">
         <i class="fa fa-angle-left fa-lg"></i>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="right carousel-control" href="#carousel-featured-videos" role="button" data-slide="next">
+      <a class="right carousel-control jumbo" href="#carousel-featured-videos" role="button" data-slide="next">
         <i class="fa fa-angle-right fa-lg"></i>
         <span class="sr-only">Next</span>
       </a>
     </div>
   </div>
+
+  {{> categoryCarousel}}
+
 
   <p>blah blah blah</p>
   <a href="/videos/somerandomidgoesherelike123891273129381203">Uh some woman playing piano</a><br>

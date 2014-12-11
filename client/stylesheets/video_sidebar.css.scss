@@ -10,11 +10,11 @@
   }
 }
 
-div.card {
+.sidebar-item > div.card {
   height: 280px;
 }
 
-.card .card-body {
+.sidebar-item > .card .card-body {
   height: 40%;
   p {
     margin: 0px;
@@ -30,11 +30,11 @@ div.card {
   display: inline;
 }
 
-#freeze {
+ #freeze {
   display: inline;
 }
 
-.play-gif {
+ .play-gif {
   position: relative;
   z-index: 10;
   text-align: right;

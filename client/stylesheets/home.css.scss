@@ -27,11 +27,11 @@ div.jumbotron#jumbotron-featured-videos {
   overflow: hidden;
 }
 
-.carousel {
+.carousel.jumbo {
   height: 100%;
 }
 
-.carousel-inner {
+.carousel-inner.jumbo {
   img {
     width: 100%;
     margin-top: -150px;
@@ -48,7 +48,7 @@ div.jumbotron#jumbotron-featured-videos {
   }
 }
 
-.carousel-control {
+.carousel-control.jumbo {
   i {
     font-size: 80px;
     margin-top: 100px;
