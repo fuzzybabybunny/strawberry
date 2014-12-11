@@ -8,33 +8,7 @@ Template.videoItem.rendered = function(){
   var MIN_TIME_LAPSE = 2;
   var REFRESH_VIDEO_PROGRESS = 1000;
 
-  var toggleFullScreen = function() {
-    var videoElement = document.getElementById("myvideo");
-    if (!document.fullscreenElement &&
-        !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
-      if (document.documentElement.requestFullscreen) {
-        videoElement.requestFullscreen();
-      } else if (document.documentElement.msRequestFullscreen) {
-        videoElement.msRequestFullscreen();
-      } else if (document.documentElement.mozRequestFullScreen) {
-        videoElement.mozRequestFullScreen();
-      } else if (document.documentElement.webkitRequestFullscreen) {
-        videoElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-      }
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
-    }
-  };
-
-  function loadCommentBar() {
+  loadCommentBar = function() {
     $("#commentBar").empty();
     var commentsArray = Comments.find({}, {sort: {currentTime: 1}}).fetch();
     var commentsCount = commentsArray.length;
@@ -59,7 +33,7 @@ Template.videoItem.rendered = function(){
       },
       function() {
     });
-  }
+  };
 
   initializePlayer = function() {
     $("#progressBar").progressbar({ value: 0 });
@@ -67,7 +41,7 @@ Template.videoItem.rendered = function(){
     $("#player-currentplaytime").html("0:00");
   };
 
-  onYouTubeIframeAPIReady = function () {
+  onYouTubeIframeAPIReady = function() {
 
     player = new YT.Player("player", {
 
