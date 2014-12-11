@@ -41,6 +41,7 @@
   margin-top: -545px;
   position: relative;
   z-index: 1000;
+  overflow: hidden;
   .comment-box {
     position: relative;
     font-size: 20px;
@@ -214,6 +215,32 @@
   position: relative;
   background: black;
   display: none;
+}
+
+#share-icons {
+  width: 56px;
+  float: right;
+  margin-right: -153px;
+  margin-top: 45px;
+  display: none;
+  .share-icon {
+  width: 45px;
+  height: 45px;
+  margin-top: 5px;
+    i {
+      font-size: 20px;
+      color: white;
+    }
+  }
+  .facebook {
+    background-color: rgba(56,78,144,1.0);
+  }
+  .twitter {
+    background-color: rgba(66,152,237,1.0);
+  }
+  .google {
+    background-color: rgba(215,58,37,1.0);
+  }
 }
 
 /*===============================================*/

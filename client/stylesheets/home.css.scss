@@ -1,0 +1,57 @@
+.current-views-container {
+  padding: 0px;
+  padding-left: 1px;
+  padding-top: 10px;
+  height: 102px;
+}
+
+.current-views {
+  width: 12%;
+  height: 80px;
+  display: inline-block;
+  margin-left: 2px;
+  margin-right: 1px;
+  overflow: hidden;
+  .panel-body {
+    padding: 0px;
+    img {
+      width: 100%;
+      height: 80px;
+    }
+  }
+}
+
+div.jumbotron#jumbotron-featured-videos {
+  padding: 0px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.carousel.jumbo {
+  height: 100%;
+}
+
+.carousel-inner.jumbo {
+  img {
+    width: 100%;
+    margin-top: -150px;
+  }
+  .carousel-caption {
+    bottom: 0px;
+    top: 300px;
+    width: 100%;
+    left: 0%;
+    right: 0%;
+    background-color: rgba(0,0,0,0.4);
+    font-size: 50px;
+    display: none;
+  }
+}
+
+.carousel-control.jumbo {
+  i {
+    font-size: 80px;
+    margin-top: 100px;
+    display: none;
+  }
+}

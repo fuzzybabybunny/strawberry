@@ -20,4 +20,21 @@ Template.home.rendered = function() {
   //     console.log(result.statusCode, result.data);
   //     var retdata =  result.data;
   // });
+
+  $(".carousel-inner.jumbo").hover(
+    function() {
+      $(this).find(".carousel-caption").slideDown('400');
+    }, function() {
+      $(this).find(".carousel-caption").slideUp('400');
+    }
+  );
+
+  $(".carousel-control.jumbo").hover(
+    function() {
+      $(this).find(".fa").show('400');
+    }, function() {
+      $(this).find(".fa").hide('400');
+    }
+  );
+
 };
