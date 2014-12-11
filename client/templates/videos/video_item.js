@@ -137,6 +137,10 @@ Template.videoItem.rendered = function(){
           else if (player.getPlayerState() === YT.PlayerState.PAUSED) {
             $(".play").html("<i class='fa fa-play'></i>");
           }
+
+          if ((player.getPlayerState() === YT.PlayerState.PLAYING) || (player.getPlayerState() === YT.PlayerState.BUFFERING)) {
+            $(".mid-play-button").css('opacity', 0);
+          }
         }
       }
     });
