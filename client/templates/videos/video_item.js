@@ -145,37 +145,18 @@ Template.videoItem.rendered = function(){
       $('#progressBar .ui-progressbar-value').show().css({'width': $('#progressBar').width() * progress});
     };
 
-    $("#progressBar").click(function(e) {
-      var parentOffset = $(this).parent().offset();
-      var clickX = e.pageX - parentOffset.left;
-      var parentWidth = $(this).parent().width();
+    var updateProgressBasedOnBarClick = function(clickEvent) {
+      var parentOffset = $(clickEvent.target).parent().offset();
+      var clickX = clickEvent.pageX - parentOffset.left;
+      var parentWidth = $(clickEvent.target).parent().width();
       var videoDuration = player.getDuration();
       var newProgress = clickX / parentWidth;
       var newPlayPosition = newProgress * videoDuration;
       updatePlayTime(newProgress);
       player.seekTo(newPlayPosition);
-      $(".mid-play-button").fadeOut('slow', function() {
-        $("#mid-overlays").click(function() {
-          if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-            player.pauseVideo();
-          }
-          else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
-            player.playVideo();
-          }
-        });
-      });
-    });
+    };
 
-    $("#commentBar").click(function(e) {
-      var parentOffset = $(this).parent().offset();
-      var clickX = e.pageX - parentOffset.left;
-      var parentWidth = $(this).parent().width();
-      var videoDuration = player.getDuration();
-      var newProgress = clickX / parentWidth;
-      var newPlayPosition = newProgress * videoDuration;
-      updatePlayTime(newProgress);
-      player.seekTo(newPlayPosition);
-    });
+    $("#progressBar, #commentBar").click(updateProgressBasedOnBarClick);
 
     $(".play").click(function() {
       if (player.getPlayerState() === YT.PlayerState.PLAYING) {
@@ -183,16 +164,6 @@ Template.videoItem.rendered = function(){
       }
       else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
         player.playVideo();
-        $(".mid-play-button").fadeOut('slow', function() {
-          $("#mid-overlays").click(function() {
-            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-              player.pauseVideo();
-            }
-            else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
-              player.playVideo();
-            }
-          });
-        });
       }
     });
 
@@ -256,16 +227,17 @@ Template.videoItem.rendered = function(){
     $(".mid-play-button").click(function () {
       player.playVideo();
       $(".mid-play-button").fadeOut('slow', function() {
-        $("#mid-overlays").click(function() {
-          if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-            player.pauseVideo();
-          }
-          else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
-            player.playVideo();
-          }
-        });
       });
 
+    });
+
+    $("#mid-overlays").click(function() {
+      if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+        player.pauseVideo();
+      }
+      else if (player.getPlayerState() !== YT.PlayerState.PLAYING) {
+        player.playVideo();
+      }
     });
 
   };
