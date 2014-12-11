@@ -1,29 +1,13 @@
 Template.videoItem.rendered = function(){
 
-  console.log(this);
-
+  var videoSourceId = this.data.videoSourceId;
 
   var DISPLAY_COMMENT_INTERVAL = 1000;
   var LOAD_COMMENT_INTERVAL = 10000;
   var MIN_TIME_LAPSE = 2;
   var REFRESH_VIDEO_PROGRESS = 1000;
 
-  // var url = window.location.href;
-  // var id = url.substring(url.lastIndexOf('/') + 1);
-  // console.log(id);
-  // // var vid = Videos.findOne(id).videoSourceId;
-  var vid = this;
-  // console.log(vid);
-
-  timeToString = function(totalSeconds) {
-    minutes = Math.floor(totalSeconds / 60);
-    seconds = Math.floor(totalSeconds % 60);
-    if (seconds < 10) {
-      return minutes + ":" + "0" + seconds;
-    } else return minutes + ":" + seconds;
-  };
-
-  toggleFullScreen = function() {
+  var toggleFullScreen = function() {
     var videoElement = document.getElementById("myvideo");
     if (!document.fullscreenElement &&
         !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
@@ -304,11 +288,4 @@ Template.videoItem.rendered = function(){
   };
 
   YT.load();
-
-  // FB.init({
-  //   appId      : '809309035792738',
-  //   status     : true,
-  //   xfbml      : true,
-  //   version    : 'v2.0'
-  // });
 };
