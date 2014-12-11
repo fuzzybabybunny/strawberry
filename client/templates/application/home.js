@@ -20,4 +20,12 @@ Template.home.rendered = function() {
   //     console.log(result.statusCode, result.data);
   //     var retdata =  result.data;
   // });
+
+  $(".carousel-inner").hover(function() {
+    $(this).find(".carousel-caption").slideToggle('400');
+  });
+
+  $(".carousel-control").hover(function() {
+    $(this).find(".fa").toggle('400');
+  });
 };

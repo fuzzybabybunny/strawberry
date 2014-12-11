@@ -272,3 +272,7 @@ Template.videoItem.rendered = function(){
 
   YT.load();
 };
+
+Handlebars.registerHelper("link", function() {
+  return "http://strawberrysite.meteor.com/videos/";
+});
