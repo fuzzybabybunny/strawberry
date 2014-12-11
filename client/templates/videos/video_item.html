@@ -40,9 +40,17 @@
           </div>
 
           <div id="share-icons">
-            <button class="btn btn-fab btn-default btn-fab btn-raised share-icon facebook"><i class="fa fa-facebook"></i></button>
-            <button class="btn btn-fab btn-default btn-fab btn-raised share-icon twitter"><i class="fa fa-twitter"></i></button>
-            <button class="btn btn-fab btn-default btn-fab btn-raised share-icon google"><i class="fa fa-google-plus"></i></button>
+            <a target='_blank' href='http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]={{link}}{{_id}}&amp;p[images][0]=http://logicum.co/wp-content/uploads/2013/01/sharetweetbuttons.jpg&amp;p[title]={{videoTitle}}&amp;p[summary]='>
+              <button class="btn btn-fab btn-default btn-fab btn-raised share-icon facebook"><i class="fa fa-facebook"></i></button>
+            </a>
+
+            <a target='_blank' href='https://twitter.com/intent/tweet?url={{link}}{{_id}}&amp;text={{videoTitle}}&amp;via=strawberry'>
+              <button class="btn btn-fab btn-default btn-fab btn-raised share-icon twitter"><i class="fa fa-twitter"></i></button>
+            </a>
+
+            <a target='_blank' href='https://plus.google.com/share?url={{link}}{{_id}}'>
+              <button class="btn btn-fab btn-default btn-fab btn-raised share-icon google"><i class="fa fa-google-plus"></i></button>
+            </a>
           </div>
         </div>
 
@@ -71,7 +79,6 @@
       </div>
     </div>
   </div>
-  <iframe src="//www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;layout=button_count&amp;appId=809309035792738" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>
 
 <!--   <a href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://strawberrysite.meteor.com/videos/somerandomidgoesherelike123891273129381203" target="_blank"
   onclick="popUp = window.open('http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://strawberrysite.meteor.com/videos/somerandomidgoesherelike123891273129381203',

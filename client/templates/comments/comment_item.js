@@ -1,15 +1,7 @@
 // helper function to change currentTime seconds into minute:seconds
 
-Handlebars.registerHelper("timeToString", function(currentTime) {
-  var timeToString = function(currentTime) {
-    minutes = Math.floor(currentTime / 60);
-    seconds = Math.floor(currentTime % 60);
-    if (seconds < 10) {
-      return minutes + ":" + "0" + seconds;
-    } else return minutes + ":" + seconds;
-  };
-
-  return timeToString(currentTime);
+Handlebars.registerHelper("timeToString", function(totalSeconds) {
+  return timeToString(totalSeconds);
 });
 
 Handlebars.registerHelper("dateRange", function(createdAt) {

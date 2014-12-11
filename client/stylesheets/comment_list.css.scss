@@ -18,6 +18,10 @@
     .popularity {
       float: right;
     }
+    .suggester {
+      clear: both;
+      font-style: italic;
+    }
 
   }
 }
@@ -35,4 +39,7 @@
   }
 }
 
-
+.all-comments {
+  font-size: 16px;
+  margin-top: 0px;
+}
