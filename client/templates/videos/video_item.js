@@ -1,6 +1,7 @@
 Template.videoItem.rendered = function(){
 
   var videoSourceId = this.data.videoSourceId;
+  var videoId = this.data._id;
 
   var DISPLAY_COMMENT_INTERVAL = 1000;
   var LOAD_COMMENT_INTERVAL = 10000;
@@ -33,7 +34,7 @@ Template.videoItem.rendered = function(){
     }
   };
 
-  function fillCommentBar() {
+  function loadCommentBar() {
     $("#commentBar").empty();
     var commentsArray = Comments.find({}, {sort: {currentTime: 1}}).fetch();
     var commentsCount = commentsArray.length;
@@ -49,6 +50,15 @@ Template.videoItem.rendered = function(){
       $("#commentBar").append('<div class="commentBarNotch" id='+comment._id+' style=width:'+1+'px></div>');
       timeOld = timeNew;
     });
+
+    $(".commentBarNotch").hover(
+      function() {
+        var id = $(this).attr('id');
+        var commentObj = Comments.findOne({_id:id});
+        $('<div class="comment-line"></div>').text(commentObj.author + " : " + commentObj.text).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
+      },
+      function() {
+    });
   }
 
   initializePlayer = function() {
@@ -63,7 +73,7 @@ Template.videoItem.rendered = function(){
 
       height: "400",
       width: "600",
-      videoId: "LdH1hSWGFGU",
+      videoId: videoSourceId,
 
       playerVars: {
         controls: 0,
@@ -143,16 +153,7 @@ Template.videoItem.rendered = function(){
           });
 
           initializePlayer();
-          fillCommentBar();
-
-          $(".commentBarNotch").hover(
-            function() {
-              var id = $(this).attr('id');
-              var commentObj = Comments.findOne({_id:id});
-              $('<div class="comment-line"></div>').text(commentObj.author + " : " + commentObj.text).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
-            },
-            function() {
-          });
+          loadCommentBar();
 
         },
         onStateChange: function (event) {
@@ -244,14 +245,15 @@ Template.videoItem.rendered = function(){
         totalSeconds = player.getCurrentTime();
         var comment = {
           text: commentText,
-          currentTime: Math.floor(totalSeconds)
+          currentTime: Math.floor(totalSeconds),
+          videoId: videoId,
         };
         Meteor.call('commentInsert', comment, function(error, result) {
           if (error)
             return alert(error.reason);
         });
         $('<div class="comment-line"></div>').text(Meteor.user().username + " : " + commentText + "@ " + timeToString(totalSeconds)).appendTo('.comment-box').fadeIn(500).delay(1000).fadeOut(500);
-        fillCommentBar();
+        loadCommentBar();
       }
     }, false);
 
