@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 insecure
 jquery
 linto:fontawesome
@@ -20,4 +19,6 @@ ixdi:material-design-iconic-font
 accounts-facebook
 service-configuration
 fourseven:scss
+autopublish
+sacha:spin
 
