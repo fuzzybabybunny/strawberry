@@ -1,5 +1,8 @@
 Template.videoItem.rendered = function(){
 
+  console.log(this);
+
+
   var DISPLAY_COMMENT_INTERVAL = 1000;
   var LOAD_COMMENT_INTERVAL = 10000;
   var MIN_TIME_LAPSE = 2;
@@ -9,7 +12,7 @@ Template.videoItem.rendered = function(){
   // var id = url.substring(url.lastIndexOf('/') + 1);
   // console.log(id);
   // // var vid = Videos.findOne(id).videoSourceId;
-  // var vid = $("#videoSourceId").html();
+  var vid = this;
   // console.log(vid);
 
   timeToString = function(totalSeconds) {
