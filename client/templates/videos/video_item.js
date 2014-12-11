@@ -10,7 +10,7 @@ Template.videoItem.rendered = function(){
 
   loadCommentBar = function() {
     $("#commentBar").empty();
-    var commentsArray = Comments.find({}, {sort: {currentTime: 1}}).fetch();
+    var commentsArray = Comments.find({videoId:videoId}, {sort: {currentTime: 1}}).fetch();
     var commentsCount = commentsArray.length;
     var commentBarWidth = $("#commentBar").width();
     var spacingWidth = commentBarWidth - commentsCount;
@@ -72,14 +72,14 @@ Template.videoItem.rendered = function(){
             }
           });
 
-          var videoData = Comments.find().fetch();
+          var videoComments = Comments.find({videoId:videoId}).fetch();
 
           var videoOldTime = 0;
 
           Meteor.setInterval(function () {
             if (player.getPlayerState() === YT.PlayerState.PLAYING) {
               var videoCurrentTime = player.getCurrentTime();
-              var commentsInInterval = videoData.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
+              var commentsInInterval = videoComments.filter( function (a) {return a.currentTime >= videoOldTime && a.currentTime <= videoCurrentTime; });
 
               if (commentsInInterval.length > 0 && videoCurrentTime - videoOldTime <= MIN_TIME_LAPSE) {
                 commentsInInterval.forEach(function(commentObj) {
@@ -102,7 +102,7 @@ Template.videoItem.rendered = function(){
 
           Meteor.setInterval(function () {
             if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-              videoData = Comments.find().fetch();
+              videoComments = Comments.find({videoId:videoId}).fetch();
             }
           }, LOAD_COMMENT_INTERVAL);
 
