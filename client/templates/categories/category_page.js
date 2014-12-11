@@ -1,11 +1,12 @@
 Template.categoryPage.helpers({
 
   'category': function(){
-    return this;
+    return this.category;
   }
 
 });
 
 Template.categoryPage.rendered = function(){
 
+  console.log(this.data.videos);
 };
