@@ -8,5 +8,5 @@ Template.categoryPage.helpers({
 
 Template.categoryPage.rendered = function(){
 
-  console.log(this.data.videos);
+  console.log(this.data);
 };
