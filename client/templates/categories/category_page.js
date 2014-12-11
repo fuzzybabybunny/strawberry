@@ -8,5 +8,4 @@ Template.categoryPage.helpers({
 
 Template.categoryPage.rendered = function(){
 
-  console.log(this.data);
 };

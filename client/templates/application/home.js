@@ -1,25 +1,38 @@
 Template.home.rendered = function() {
-  // Meteor.call('fetch');
+  // result = Meteor.call('fetch');
 
-  // Meteor.call("checkTwitter", function(error, results) {
-  //   console.log(results.content); //results.data should be a JSON object
-  // });
+  var result = Meteor.call("ajax_fetch");
+  console.log(result);
 
-  Meteor.call("ajax_fetch", function(error, results) {
-    console.log("home:"+results); //results.data should be a JSON object
-  });
+  youtubeParser = function(url) {
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match && match[7].length == 11) {
+        var b = match[7];
+        return b;
+    } else {
+        return false;
+    }
+  };
 
-  // var url = "http://gdata.youtube.com/feeds/api/standardfeeds/most_viewed?alt=json";
-  // var result = HTTP.get(url, {timeout:30000});
-  // var params = {
-  //   // access_token: Meteor.user().services.google.accessToken,
-  //   part: "snippet"
-  // };
-  // Meteor.http.get(url, function (err, result) {
-  //     console.log("here");
-  //     console.log(result.statusCode, result.data);
-  //     var retdata =  result.data;
-  // });
+  var commentInput = document.getElementById("url");
+  commentInput.addEventListener("keydown", function(e) {
+    if (e.keyCode == 13) {
+      var url = $("#url").val();
+      var videoSourceId = youtubeParser(url);
+      if (videoSourceId !== false) {
+        console.log(videoSourceId);
+      }
+
+      var comment = {
+        videoSourceId: videoSourceId
+      };
+      Meteor.call('videoInsert', comment, function(error, result) {
+        if (error)
+          return alert(error.reason);
+      });
+    }
+  }, false);
 
   $(".carousel-inner.jumbo").hover(
     function() {
