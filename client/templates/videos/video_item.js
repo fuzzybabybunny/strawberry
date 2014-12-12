@@ -244,6 +244,19 @@ Template.videoItem.rendered = function(){
       }
     });
 
+    $("#lmao, #love, #fku, #magic, #omfg, #shite, #nsfw, #die").click(function() {
+      var voteProperties = {
+        categoryId: $(this).attr('id'),
+        videoId: videoId
+      };
+      console.log(voteProperties);
+      Meteor.call('videoVote', voteProperties, function(error, result) {
+        if (error)
+          return alert(error.reason);
+      });
+
+    });
+
   };
 
   YT.load();
