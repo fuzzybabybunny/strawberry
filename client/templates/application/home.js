@@ -15,9 +15,13 @@ Template.home.rendered = function() {
       var videoAttributes = {
         videoSourceId: videoSourceId
       };
+
       Meteor.call('videoInsert', videoAttributes, function(error, result) {
-        if (error)
+        if (error) {
           return alert(error.reason);
+        } else {
+          // Router.go('/videos/'+videoSourceId);
+        }
       });
     }
   }, false);
