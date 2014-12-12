@@ -15,7 +15,7 @@ if (Comments.find().count() === 0) {
 
   var video1Id = Videos.insert({
     userId: mark._id,
-    author: mark.profile.name,
+    videoSubmiter: mark.profile.name,
     createdAt: new Date(),
     videoSourceId: "LdH1hSWGFGU",
     videoTitle: "Woman playing piano",
@@ -35,7 +35,7 @@ if (Comments.find().count() === 0) {
 
   var video2Id = Videos.insert({
     userId: mark._id,
-    author: mark.profile.name,
+    videoSubmiter: mark.profile.name,
     createdAt: new Date(),
     videoSourceId: "VxvDVhjALoU",
     videoTitle: "Funny Video 1",
@@ -54,7 +54,7 @@ if (Comments.find().count() === 0) {
 
   var video3Id = Videos.insert({
     userId: mark._id,
-    author: mark.profile.name,
+    videoSubmiter: mark.profile.name,
     createdAt: new Date(),
     videoSourceId: "no1q3wuvwmg",
     videoTitle: "bum implant",
@@ -73,7 +73,7 @@ if (Comments.find().count() === 0) {
 
   var video4Id = Videos.insert({
     userId: mark._id,
-    author: mark.profile.name,
+    videoSubmiter: mark.profile.name,
     createdAt: new Date(),
     videoSourceId: "nIsCs9_-LP8",
     videoTitle: "Emotional baby! Too cute!",
@@ -92,7 +92,7 @@ if (Comments.find().count() === 0) {
 
   var video5Id = Videos.insert({
     userId: mark._id,
-    author: mark.profile.name,
+    videoSubmiter: mark.profile.name,
     createdAt: new Date(),
     videoSourceId: "NIZmH96vUhU",
     videoTitle: "Câmera Escondida Annabelle - Inédita (05/10/14) - Annabelle Prank",
@@ -111,7 +111,7 @@ if (Comments.find().count() === 0) {
 
   var video6Id = Videos.insert({
     userId: mark._id,
-    author: mark.profile.name,
+    videoSubmiter: mark.profile.name,
     createdAt: new Date(),
     videoSourceId: "fA7XfJAPTLQ",
     videoTitle: "Cheating Death - Near Death Experiences",
@@ -130,7 +130,7 @@ if (Comments.find().count() === 0) {
 
   var video7Id = Videos.insert({
     userId: mark._id,
-    author: mark.profile.name,
+    videoSubmiter: mark.profile.name,
     createdAt: new Date(),
     videoSourceId: "wWLhrHVySgA",
     videoTitle: "Alison Gold - Chinese Food (Official Music Video)",
@@ -149,7 +149,7 @@ if (Comments.find().count() === 0) {
 
   var video8Id = Videos.insert({
     userId: mark._id,
-    author: mark.profile.name,
+    videoSubmiter: mark.profile.name,
     createdAt: new Date(),
     videoSourceId: "dTAAsCNK7RA",
     videoTitle: "OK Go - Here It Goes Again",
@@ -168,7 +168,7 @@ if (Comments.find().count() === 0) {
 
   var video9Id = Videos.insert({
     userId: mark._id,
-    author: mark.profile.name,
+    videoSubmiter: mark.profile.name,
     createdAt: new Date(),
     videoSourceId: "6bVa6jn4rpE",
     videoTitle: "University of Florida student Tasered at Kerry forum",

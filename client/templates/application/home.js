@@ -1,22 +1,11 @@
 Template.home.rendered = function() {
   // result = Meteor.call('fetch');
 
-  var result = Meteor.call("ajax_fetch");
-  console.log(result);
+  // var result = Meteor.call("ajax_fetch");
+  // console.log(result);
 
-  youtubeParser = function(url) {
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-    var match = url.match(regExp);
-    if (match && match[7].length == 11) {
-        var b = match[7];
-        return b;
-    } else {
-        return false;
-    }
-  };
-
-  var commentInput = document.getElementById("url");
-  commentInput.addEventListener("keydown", function(e) {
+  var urlInput = document.getElementById("url");
+  urlInput.addEventListener("keydown", function(e) {
     if (e.keyCode == 13) {
       var url = $("#url").val();
       var videoSourceId = youtubeParser(url);
@@ -24,10 +13,10 @@ Template.home.rendered = function() {
         console.log(videoSourceId);
       }
 
-      var comment = {
+      var videoAttributes = {
         videoSourceId: videoSourceId
       };
-      Meteor.call('videoInsert', comment, function(error, result) {
+      Meteor.call('videoInsert', videoAttributes, function(error, result) {
         if (error)
           return alert(error.reason);
       });
