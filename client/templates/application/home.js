@@ -10,7 +10,6 @@ Template.home.rendered = function() {
       var url = $("#url").val();
       var videoSourceId = youtubeParser(url);
       if (videoSourceId !== false) {
-        console.log(videoSourceId);
       }
 
       var videoAttributes = {
