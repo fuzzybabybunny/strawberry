@@ -51,7 +51,6 @@ if (Comments.find().count() === 0) {
       die: 0
     }
   });
-  var video = Videos.findOne(video2Id);
 
   var video3Id = Videos.insert({
     userId: mark._id,
@@ -71,7 +70,6 @@ if (Comments.find().count() === 0) {
       die: 0
     }
   });
-  var video = Videos.findOne(video3Id);
 
   var video4Id = Videos.insert({
     userId: mark._id,
@@ -91,7 +89,6 @@ if (Comments.find().count() === 0) {
       die: 0
     }
   });
-  var video = Videos.findOne(video3Id);
 
   var video5Id = Videos.insert({
     userId: mark._id,
@@ -111,7 +108,6 @@ if (Comments.find().count() === 0) {
       die: 0
     }
   });
-  var video = Videos.findOne(video3Id);
 
   var video6Id = Videos.insert({
     userId: mark._id,
@@ -131,7 +127,6 @@ if (Comments.find().count() === 0) {
       die: 0
     }
   });
-  var video = Videos.findOne(video3Id);
 
   var video7Id = Videos.insert({
     userId: mark._id,
@@ -151,7 +146,6 @@ if (Comments.find().count() === 0) {
       die: 0
     }
   });
-  var video = Videos.findOne(video3Id);
 
   var video8Id = Videos.insert({
     userId: mark._id,
@@ -171,7 +165,6 @@ if (Comments.find().count() === 0) {
       die: 0
     }
   });
-  var video = Videos.findOne(video3Id);
 
   var video9Id = Videos.insert({
     userId: mark._id,
@@ -191,7 +184,6 @@ if (Comments.find().count() === 0) {
       die: 0
     }
   });
-  var video = Videos.findOne(video9Id);
 
   Comments.insert({
     videoId: video._id,
