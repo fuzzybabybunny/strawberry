@@ -1,6 +1,6 @@
 Template.commentList.helpers({
   comments: function() {
-    return Comments.find({}, {sort: {createdAt: -1}});
+    return Comments.find({videoId:this._id}, {sort: {createdAt: -1}});
   }
 });
 
