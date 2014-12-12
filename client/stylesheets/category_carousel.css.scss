@@ -1,7 +1,8 @@
 
 
 .carousel-item {
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   .card {
     .card-height-indicator {
       margin-top: 90%;
@@ -9,6 +10,10 @@
     .card-content {
       .card-image {
         height: 65%;
+        img {
+          height: 134%;
+          margin-top: -27px;
+        }
       }
       .card-body {
         padding: 5px;

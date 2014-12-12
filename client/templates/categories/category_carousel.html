@@ -1,103 +1,41 @@
 <template name="categoryCarousel">
-{{foo}}
   <div id="carousel-category-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
-  {{#each videos}}
-    {{videoTitle}}
-  {{/each}}
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
+
+      <!-- start of cart one -->
       <div class="item active">
 
+        <!-- start of content -->
+        {{#each videos}}
         <div class="carousel-item col-xs-3">
           <div class="card">
-            <div class="play-gif"><i class="fa fa-play-circle-o"></i></div>
             <div class="card-height-indicator"></div>
 
             <div class="card-content">
 
               <div class="card-image">
-                  <a href="http://youtu.be/Uh8kwiELfZk" target="_blank" class="img-toggle">
-                    <img class="freeze" src="http://i.imgur.com/tO2dI2F.jpg">
+                  <a href="/videos/{{ _id }}" target="_blank">
+                    <img class="freeze" src="http://img.youtube.com/vi/{{videoSourceId}}/hqdefault.jpg">
                   </a>
               </div>
 
               <div class="card-body">
-                  <h1>These girls can dance!</h1>
-                  <p>Suggested by Mark Wilson</p>
+                  <h1>{{videoTitle}}</h1>
+                  <p>Suggested by {{author}}</p>
                   <p>1,000,000 views</p>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="carousel-item col-xs-3">
-          <div class="card">
-            <div class="play-gif"><i class="fa fa-play-circle-o"></i></div>
-            <div class="card-height-indicator"></div>
-
-            <div class="card-content">
-
-              <div class="card-image">
-                  <a href="http://youtu.be/Uh8kwiELfZk" target="_blank" class="img-toggle">
-                    <img class="freeze" src="http://i.imgur.com/tO2dI2F.jpg">
-                  </a>
-              </div>
-
-              <div class="card-body">
-                  <h1>These girls can dance!</h1>
-                  <p>Suggested by Mark Wilson</p>
-                  <p>1,000,000 views</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item col-xs-3">
-          <div class="card">
-            <div class="play-gif"><i class="fa fa-play-circle-o"></i></div>
-            <div class="card-height-indicator"></div>
-
-            <div class="card-content">
-
-              <div class="card-image">
-                  <a href="http://youtu.be/Uh8kwiELfZk" target="_blank" class="img-toggle">
-                    <img class="freeze" src="http://i.imgur.com/tO2dI2F.jpg">
-                  </a>
-              </div>
-
-              <div class="card-body">
-                  <h1>These girls can dance!</h1>
-                  <p>Suggested by Mark Wilson</p>
-                  <p>1,000,000 views</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item col-xs-3">
-          <div class="card">
-            <div class="play-gif"><i class="fa fa-play-circle-o"></i></div>
-            <div class="card-height-indicator"></div>
-
-            <div class="card-content">
-
-              <div class="card-image">
-                  <a href="http://youtu.be/Uh8kwiELfZk" target="_blank" class="img-toggle">
-                    <img class="freeze" src="http://i.imgur.com/tO2dI2F.jpg">
-                  </a>
-              </div>
-
-              <div class="card-body">
-                  <h1>These girls can dance!</h1>
-                  <p>Suggested by Mark Wilson</p>
-                  <p>1,000,000 views</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        {{/each}}
+        <!-- end of content -->
 
       </div>
+      <!-- end of cart 1 -->
+
+
       <div class="item">
         <img src="..." alt="...">
         <div class="carousel-caption">

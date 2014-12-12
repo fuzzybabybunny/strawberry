@@ -10,8 +10,7 @@ Template.categoryCarousel.rendered = function () {
 
 Template.categoryCarousel.helpers({
   'videos': function(){
-    console.log(this);
-    videos = Videos.find({categoryTopVote: this.foo}).fetch();
+    videos = Videos.find({categoryTopVote: this.category}).fetch();
     return videos;
   }
 
